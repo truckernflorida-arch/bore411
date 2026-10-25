@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bore411.com/sitemap.xml
