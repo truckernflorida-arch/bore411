@@ -17,3 +17,19 @@ section{padding:44px 0;border-top:1px solid var(--line)}h2{margin:0 0 18px;font-
 form{display:grid;gap:10px}input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid var(--line);background:#141311;color:var(--txt);font-size:1rem}
 .todo{font-size:.8rem;color:#ffd23f}footer{padding:28px 0;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
 @media(min-width:760px){.hero h1{font-size:3rem}.grid{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(4,1fr)}.two{grid-template-columns:1fr 1fr}}
+/* --- v2: photos, nav, bid desk --- */
+nav.links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}nav.links a{text-decoration:none;font-weight:700;color:var(--txt);font-size:.95rem}nav.links a:hover,nav.links a.on{color:var(--or)}
+.hero.photo{position:relative;background:#2a231c url(images/hero-hdd-rig.jpg) center/cover no-repeat;padding:90px 0 80px;min-height:min(62vh,640px);display:flex;align-items:center}
+.hero.photo:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,9,8,.92) 0%,rgba(10,9,8,.7) 55%,rgba(10,9,8,.35) 100%)}
+.hero.photo .wrap{position:relative;width:100%}.hero.photo p{color:#d8d0c4;max-width:620px}
+.hero .kick{display:inline-block;font-weight:800;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--or);margin-bottom:10px}
+.split{display:grid;gap:22px;align-items:center}.split img,.band img{width:100%;height:auto;border-radius:10px;display:block;border:1px solid var(--line)}
+.band{display:grid;gap:14px}.band figure{margin:0;position:relative}.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.85));border-radius:0 0 10px 10px;font-weight:700}
+ul.chk{list-style:none;padding:0;margin:0}ul.chk li{padding:8px 0;border-bottom:1px solid var(--line)}ul.chk li:before{content:"\2610  ";color:var(--or)}
+.soonbox{border:1px dashed #6b6255;border-radius:10px;padding:14px;color:var(--mut)}.soonbox b{color:#ffd23f}
+.warn{background:#2b2314;border:1px solid #6b5420;border-radius:10px;padding:14px;font-size:.92rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:700}
+.tbl{overflow-x:auto}.big{font-size:1.5rem;font-weight:900;color:var(--or)}.out .card{margin-bottom:10px}
+.card a.more{font-weight:800}
+@media(min-width:760px){.split{grid-template-columns:1.1fr 1fr}.band{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){header.top{flex-direction:column;align-items:flex-start;gap:6px}nav.links{gap:12px}nav.links a{font-size:.85rem}.hero.photo{min-height:auto;padding:60px 0 50px}}

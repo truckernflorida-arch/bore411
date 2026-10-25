@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bid package — Bore411</title><meta name="description" content="Bid package for a Florida underground / HDD lead: due date, agency posting, 811 timeline and go/no-go checklist.">
+<link rel="canonical" href="https://bore411.com/bid.html"><meta property="og:type" content="website"><meta property="og:site_name" content="Bore411"><meta property="og:title" content="Bid package — Bore411"><meta property="og:description" content="Bid package for a Florida underground / HDD lead: due date, agency posting, 811 timeline and go/no-go checklist."><meta property="og:url" content="https://bore411.com/bid.html"><meta property="og:image" content="https://bore411.com/images/hero-hdd-rig.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/style.css"></head><body>
+<div class="apwa" aria-hidden="true"><i style="background:#e4002b"></i><i style="background:#ffd100"></i><i style="background:#ff6a13"></i><i style="background:#0072ce"></i><i style="background:#a05eb5"></i><i style="background:#43b02a"></i><i style="background:#fff"></i><i style="background:#ff69b4"></i></div>
+<div class="wrap"><header class="top"><a class="logo" href="/" style="text-decoration:none;color:var(--txt)">BORE<b>411</b></a><nav class="links"><a href="/#leads">Leads</a><a href="/tools.html">811 calculator</a><a href="/benchmarks.html">Price benchmarks</a><a href="/#alerts">Get alerts</a></nav></header></div>
+<div class="wrap"><section id="pkg" style="border-top:0"><p class="mut">Loading bid package…</p></section></div>
+<footer><div class="wrap">Leads link to original sources; verify details with the issuing agency. Bore411 is not affiliated with listed agencies or sources. Bore411 is a free information board: it does not bid work, take a percentage of any job, or hold or share contractor licenses.<br>Photos on this site are illustrative AI-generated images, not real Bore411 jobs or crews.<br>© 2026 Bore411</div></footer>
+<script src="/common.js"></script><script>
+const B=B411,{esc}=B,id=new URLSearchParams(location.search).get('id'),el=document.getElementById('pkg');
+function ics(l,d){const z=x=>x.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const e=s=>String(s).replace(/[\\,;]/g,m=>'\\'+m).replace(/\n/g,' ');
+return 'data:text/calendar;charset=utf-8,'+encodeURIComponent(['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Bore411//EN','BEGIN:VEVENT','UID:'+B.leadId(l)+'@bore411.com','DTSTAMP:'+z(new Date()),'DTSTART:'+z(new Date(d.getTime()-36e5)),'DTEND:'+z(d),'SUMMARY:'+e('Bid due: '+l.title),'DESCRIPTION:'+e((l.bid?'#'+l.bid+' ':'')+l.agency+'. Source: '+l.url),'URL:'+l.url,'BEGIN:VALARM','TRIGGER:-P2D','ACTION:DISPLAY','DESCRIPTION:Bid due in 2 days','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n'))}
+function find(re,s){const m=s.match(re);return m?m[0]:null}
+fetch('/leads.json').then(r=>r.json()).then(L=>{const l=L.find(x=>B.leadId(x)===id);
+if(!l){el.innerHTML='<h2>Lead not found</h2><p class="mut">It may have expired or been updated. <a href="/#leads">See today\'s leads</a>.</p>';return}
+document.title=l.title+' — Bore411 bid package';const s=l.scope||'',due=B.dueOf(l),d=due?new Date(due):null;
+const lic=find(/\b(licen[sc]e[^.;]*|underground utility[^.;]*)/i,s),bond=find(/\b[^.;]*bond[^.;]*/i,s),ins=find(/\b[^.;]*insurance[^.;]*/i,s),pre=find(/\b[^.;]*(pre-?bid|mandatory meeting)[^.;]*/i,s);
+const chk='— check the solicitation';
+el.innerHTML=`<span class="tag">${l.type==='bid'?'Public bid':'Sub work'}</span>${l.bid?`<span class="mut">#${esc(l.bid)}</span>`:''}
+<h1 style="margin:8px 0 6px">${esc(l.title)}</h1><div class="mut">${esc(l.agency)} · ${esc(l.location)}</div>
+<div class="grid two" style="margin-top:20px">
+<div class="card"><h3>Summary</h3><p>${esc(s)}</p><p class="mut">Source: <a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.source)} ↗</a> — read the full solicitation and addenda at the original posting.</p><a class="btn p" href="${esc(l.url)}" target="_blank" rel="noopener">Open original posting ↗</a></div>
+<div class="card"><h3>${l.type==='bid'?'Bid due':'Open until'}</h3><div class="big">${d?esc(B.fmtET(d)):'Ongoing / rolling'}</div>${d?`<p><a class="btn s" download="${esc(B.leadId(l))}.ics" href="${ics(l,d)}">Add to calendar (.ics)</a></p>`:''}<p class="mut">Confirm the deadline and any addenda with the agency.</p></div>
+<div class="card"><h3>811 timeline (F.S. 556)</h3><p class="mut">Plan your start date after award, then work back:</p><label class="mut">Planned dig start<input type="date" id="st"></label><div id="t811" style="margin-top:10px"></div><p class="mut" style="font-size:.8rem">Informational only. Confirm with Sunshine 811 (call 811 or <a href="https://exactix.sunshine811.com" target="_blank" rel="noopener">Exactix</a>). Each excavator, including each sub, pulls its own ticket. <a href="/tools.html">Full calculator</a></p></div>
+<div class="card"><h3>Go / no-go checklist</h3><ul class="chk">
+<li>Sunbiz: company status active (<a href="https://search.sunbiz.org" target="_blank" rel="noopener">search</a>)</li>
+<li>E-Verify enrolled (<a href="https://www.e-verify.gov" target="_blank" rel="noopener">e-verify.gov</a>)</li>
+<li>Certificate of insurance: ${ins?esc(ins):'limits '+chk}</li>
+<li>Bond: ${bond?esc(bond):'bid/performance bond '+chk}</li>
+<li>Pre-bid meeting: ${pre?esc(pre):'mandatory or not '+chk}</li>
+<li>License class: ${lic?esc(lic):'required license '+chk} (<a href="https://www.myfloridalicense.com/wl11.asp" target="_blank" rel="noopener">DBPR lookup</a>)</li></ul></div>
+<div class="card"><h3>Soil &amp; sinkhole risk</h3><div class="soonbox"><b>Coming soon.</b> USDA soil series and FGS sinkhole screening for this location. Screening only, not a geotechnical report.</div></div>
+<div class="card"><h3>Permit route &amp; price benchmarks</h3><div class="soonbox"><b>Coming soon.</b> State-road (FDOT) vs county right-of-way flag for this job. For now see <a href="/benchmarks.html">FDOT statewide benchmarks</a>.</div></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>Need a sub? Available to sub?</h3><p class="mut">Post it on the board and mention ${l.bid?'#'+esc(l.bid):'this lead'}. Bore411 connects crews; it does not bid, take a cut, or share licenses.</p><a class="btn p" href="/#post">I need a sub</a><a class="btn s" href="/#post">I'm available to sub</a></div>`;
+const st=document.getElementById('st'),out=document.getElementById('t811');
+const run=()=>{if(!st.value){out.innerHTML='<p class="mut">Pick a date.</p>';return}const c=B.lastCallDay(st.value);
+out.innerHTML=`<p>Last day to call 811: <b>${B.pretty(c)}</b><br>Earliest legal dig if you call then: <b>${B.pretty(B.earliestDig(c))}</b><br>Ticket good through: <b>${B.pretty(B.ticketExpiry(c))}</b></p>`};
+st.addEventListener('change',run);run();
+}).catch(()=>el.innerHTML='<p class="mut">Bid package failed to load.</p>');
+</script></body></html>
