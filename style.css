@@ -33,3 +33,7 @@ table{width:100%;border-collapse:collapse;font-size:.92rem}th,td{text-align:left
 .card a.more{font-weight:800}
 @media(min-width:760px){.split{grid-template-columns:1.1fr 1fr}.band{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){header.top{flex-direction:column;align-items:flex-start;gap:6px}nav.links{gap:12px}nav.links a{font-size:.85rem}.hero.photo{min-height:auto;padding:60px 0 50px}}
+/* --- v3: rig tags, filter --- */
+.filt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}.filt button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-weight:700;cursor:pointer;font-size:.85rem}.filt button.on{background:var(--or);color:#111;border-color:var(--or)}
+a.tag.rig{text-decoration:none;background:#1f2a33;color:#8fc7ff}a.tag.r-check{background:#2b2b2b;color:var(--mut)}
+@media(max-width:600px){header.top{flex-direction:column;align-items:flex-start}nav.links{width:100%;gap:8px 14px}}

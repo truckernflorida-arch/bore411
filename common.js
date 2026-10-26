@@ -46,6 +46,26 @@ function ticketExpiry(callStr){let d=addDays(effectiveNotice(parse(callStr)),30)
 /* Latest business day you can call and still legally dig on startStr. */
 function lastCallDay(startStr,n=2){let d=addDays(parse(startStr),-1);for(let i=0;i<60;i++){if(isBiz(d)&&earliestDig(ymd(d),n)<=startStr)return ymd(d);d=addDays(d,-1)}return null}
 const pretty=s=>parse(s).toLocaleDateString('en-US',{timeZone:'UTC',weekday:'short',month:'short',day:'numeric',year:'numeric'});
-const API={esc,leadId,dueOf,fmtET,holidays,isBiz,earliestDig,ticketExpiry,lastCallDay,pretty,ymd,parse};
+
+/* ---- Estimated rig class from scope text (rule of thumb, see /rigs.html) ---- */
+const RIG={small:'Small rig',mid:'Mid rig',large:'Large rig',maxi:'Maxi rig',check:'Check specs'};
+function rigFor(d,len,water){ // d = largest pipe in inches (or null), len = LF (or null)
+ if(water)return 'maxi';
+ if(d==null)return null;
+ if(d<=4)return (len&&len>1000)?'mid':'small';
+ if(d<=6)return 'mid';
+ if(d<=12)return (len&&len>1500)?'large':'mid';
+ return 'large'}
+function rigClass(l){const s=((l.title||'')+' . '+(l.scope||'')).toLowerCase().replace(/[–—]/g,'-');
+ const water=/\b(river|intracoastal|waterway|bay crossing|canal crossing)\b/.test(s);
+ let d=null;const re=/(\d{1,2}(?:\s*\/\s*\d{1,2})*)(?:\s*-\s*(\d{1,2}))?\s*(?:-|\s)?(?:in\b|inch|")/g;let m;
+ while((m=re.exec(s))){const nums=m[1].split('/').map(Number);if(m[2])nums.push(+m[2]);for(const n of nums)if(n>0&&n<=60)d=Math.max(d||0,n)}
+ let len=null;const lr=/([\d,]{2,7})\s*\+?\s*(?:lf|linear f)/g;while((m=lr.exec(s))){const n=+m[1].replace(/,/g,'');if(n>0)len=Math.min(len||9e9,n)}
+ // len = shortest stated run (largest bore length usually unknown); conduit/fiber w/o size => small
+ let c=rigFor(d,len,water);
+ if(!c&&/\b(conduit|fiber|ftth|innerduct|service line|missile)\b/.test(s))c='small';
+ return c||'check'}
+
+const API={RIG,rigClass,rigFor,esc,leadId,dueOf,fmtET,holidays,isBiz,earliestDig,ticketExpiry,lastCallDay,pretty,ymd,parse};
 if(typeof module!=='undefined')module.exports=API;else G.B411=API;
 })(this);
