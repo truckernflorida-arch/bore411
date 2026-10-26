@@ -6,6 +6,9 @@ Free load board and Florida HDD bid desk for underground work (HDD, boring, tren
 - `bid.html?id=…` — bid package for each lead, generated in the browser from `leads.json`. The id is derived from existing fields (bid # or title + agency), so the daily routine needs no new field.
 - `tools.html` — Florida 811 dig-date calculator (F.S. 556.105; Sunshine 811 holidays). Logic in `common.js`.
 - `benchmarks.html` — FDOT statewide 12-month item average prices (published figures only).
+- `rigs.html` — HDD rig size classes with sourced specs, a rough rig picker, support-equipment checklist.
+- `equipment.html` — free equipment for-sale/rent board (starter); form posts to the job-post Formspree with `form_type=equipment`.
+- Rig-class tags (est.) on leads come from `rigClass()` in `common.js`, parsed from the scope text; no extra leads.json field.
 - `leads.json` — rewritten daily: `type, title, agency, location, bid, due` (or `open_until`), `scope, source, url`.
 
 Images in `/images` are illustrative AI-generated pictures, not real Bore411 jobs or crews.
