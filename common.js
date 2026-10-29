@@ -66,6 +66,25 @@ function rigClass(l){const s=((l.title||'')+' . '+(l.scope||'')).toLowerCase().r
  if(!c&&/\b(conduit|fiber|ftth|innerduct|service line|missile)\b/.test(s))c='small';
  return c||'check'}
 
-const API={RIG,rigClass,rigFor,esc,leadId,dueOf,fmtET,holidays,isBiz,earliestDig,ticketExpiry,lastCallDay,pretty,ymd,parse};
+/* ---- Location -> screening point (Census 2024 Gazetteer internal points, /fl-geo.json) ---- */
+function geoCandidates(loc,G){const o0=String(loc||'').toLowerCase();let s=' '+String(loc||'').toLowerCase().replace(/\s+/g,' ')+' ';const out=[],seen=new Set();
+ const rx=n=>n.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/ /g,'\\s?');
+ const cn=Object.keys(G.counties).sort((a,b)=>b.length-a.length),cHits=[];
+ for(const n of cn){const r=new RegExp('\\b'+rx(n)+'(?=\\s*(?:county|counties|co\\b|(?:&|and|,)\\s*[a-z. -]+\\s(?:county|counties|co\\b)))','i');const m=s.match(r);if(m){cHits.push(n);s=s.replace(r,' ')}}
+ s=s.replace(/\b(county|counties|co\.)/g,' ');
+ const pn=Object.keys(G.places).filter(n=>n.length>3).sort((a,b)=>b.length-a.length);
+ for(const n of pn){const r=new RegExp('(^|[^a-z])'+rx(n)+'(?![a-z])','i');if(r.test(s)){s=s.replace(r,'$1 ');if(!seen.has('p'+n)){seen.add('p'+n);out.push({i:o0.indexOf(n.toLowerCase()),label:n+' (town center)',lat:G.places[n][0],lon:G.places[n][1]})}}}
+ for(const n of cHits)out.push({label:n+' County (county center)',lat:G.counties[n][0],lon:G.counties[n][1]});
+ out.sort((a,b)=>a.i-b.i);return out}
+/* ---- USDA NRCS Soil Data Access (SSURGO) point query ---- */
+const SDA='https://sdmdataaccess.sc.egov.usda.gov/Tabular/post.rest';
+function sdaQuery(q){return fetch(SDA,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({format:'JSON+COLUMNNAME',query:q})}).then(r=>{if(!r.ok)throw new Error('SDA '+r.status);return r.json()}).then(j=>{const t=j.Table||[];const h=t[0]||[];return t.slice(1).map(r=>Object.fromEntries(h.map((k,i)=>[k,r[i]])))})}
+function soilAt(lat,lon){lat=+lat;lon=+lon;if(!isFinite(lat)||!isFinite(lon)||lat<24||lat>31.1||lon<-87.7||lon>-79.8)return Promise.reject(new Error('Point is outside Florida'));
+ const pt=`point(${lon.toFixed(5)} ${lat.toFixed(5)})`,sub=`SELECT * FROM SDA_Get_Mukey_from_intersection_with_WktWgs84('${pt}')`;
+ return Promise.all([sdaQuery(`SELECT mu.mukey, mu.muname, l.areaname, a.wtdepannmin, a.brockdepmin, a.drclassdcd, a.flodfreqdcd, a.hydgrpdcd FROM mapunit mu INNER JOIN legend l ON l.lkey=mu.lkey LEFT JOIN muaggatt a ON a.mukey=mu.mukey WHERE mu.mukey IN (${sub})`),
+  sdaQuery(`SELECT c.mukey, c.compname, c.comppct_r, c.drainagecl, c.hydgrp, c.taxorder FROM component c WHERE c.majcompflag='Yes' AND c.mukey IN (${sub}) ORDER BY c.comppct_r DESC`)]).then(([mu,co])=>mu.map(m=>Object.assign(m,{comps:co.filter(c=>c.mukey===m.mukey)})))}
+const cmFt=cm=>cm==null||cm===''?null:(cm/30.48).toFixed(1);
+
+const API={geoCandidates,soilAt,cmFt,RIG,rigClass,rigFor,esc,leadId,dueOf,fmtET,holidays,isBiz,earliestDig,ticketExpiry,lastCallDay,pretty,ymd,parse};
 if(typeof module!=='undefined')module.exports=API;else G.B411=API;
 })(this);
