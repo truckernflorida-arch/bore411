@@ -4,6 +4,7 @@ Free load board and Florida HDD bid desk for underground work (HDD, boring, tren
 
 - `index.html` — home: hero, how it works, daily leads (from `leads.json`), alert + post-a-bore forms (Formspree).
 - `bid.html?id=…` — bid package for each lead, generated in the browser from `leads.json`. The id is derived from existing fields (bid # or title + agency), so the daily routine needs no new field.
+- Bid pages include a USDA soil screening card: the lead's `location` text is matched to a town or county point in `fl-geo.json` (U.S. Census 2024 Gazetteer internal points), then the browser queries USDA NRCS Soil Data Access (SSURGO) live for map unit, major soils, drainage class, hydrologic group, water table, bedrock depth and flooding. Users can enter job-site coordinates instead. Screening-level only. Logic in `geoCandidates()` / `soilAt()` in `common.js`.
 - `tools.html` — Florida 811 dig-date calculator (F.S. 556.105; Sunshine 811 holidays). Logic in `common.js`.
 - `benchmarks.html` — FDOT statewide 12-month item average prices plus Southwest Florida market areas 09, 10 and 08 with a county-to-market-area lookup (published figures only).
 - `rigs.html` — HDD rig size classes with sourced specs, a rough rig picker, support-equipment checklist.

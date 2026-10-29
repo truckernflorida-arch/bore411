@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bid package — Bore411</title><meta name="description" content="Bid package for a Florida underground / HDD lead: due date, agency posting, 811 timeline and go/no-go checklist.">
-<link rel="canonical" href="https://bore411.com/bid.html"><meta property="og:type" content="website"><meta property="og:site_name" content="Bore411"><meta property="og:title" content="Bid package — Bore411"><meta property="og:description" content="Bid package for a Florida underground / HDD lead: due date, agency posting, 811 timeline and go/no-go checklist."><meta property="og:url" content="https://bore411.com/bid.html"><meta property="og:image" content="https://bore411.com/images/hero-hdd-rig.jpg"><meta name="twitter:card" content="summary_large_image">
+<title>Bid package — Bore411</title><meta name="description" content="Bid package for a Florida underground / HDD lead: due date, agency posting, 811 timeline, USDA soil screening and go/no-go checklist.">
+<link rel="canonical" href="https://bore411.com/bid.html"><meta property="og:type" content="website"><meta property="og:site_name" content="Bore411"><meta property="og:title" content="Bid package — Bore411"><meta property="og:description" content="Bid package for a Florida underground / HDD lead: due date, agency posting, 811 timeline, USDA soil screening and go/no-go checklist."><meta property="og:url" content="https://bore411.com/bid.html"><meta property="og:image" content="https://bore411.com/images/hero-hdd-rig.jpg"><meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/style.css"></head><body>
 <div class="apwa" aria-hidden="true"><i style="background:#e4002b"></i><i style="background:#ffd100"></i><i style="background:#ff6a13"></i><i style="background:#0072ce"></i><i style="background:#a05eb5"></i><i style="background:#43b02a"></i><i style="background:#fff"></i><i style="background:#ff69b4"></i></div>
 <div class="wrap"><header class="top"><a class="logo" href="/" style="text-decoration:none;color:var(--txt)">BORE<b>411</b></a><nav class="links"><a href="/#leads">Leads</a><a href="/tools.html">811 calculator</a><a href="/benchmarks.html">Price benchmarks</a><a href="/rigs.html">Rig sizes</a><a href="/equipment.html">Equipment</a><a href="/#alerts">Get alerts</a></nav></header></div>
@@ -30,13 +30,36 @@ el.innerHTML=`<span class="tag">${l.type==='bid'?'Public bid':'Sub work'}</span>
 <li>Pre-bid meeting: ${pre?esc(pre):'mandatory or not '+chk}</li>
 <li>License class: ${lic?esc(lic):'required license '+chk} (<a href="https://www.myfloridalicense.com/wl11.asp" target="_blank" rel="noopener">DBPR lookup</a>)</li></ul></div>
 <div class="card"><h3>Rig &amp; support equipment</h3><p>Estimated rig class: <b>${B.RIG[B.rigClass(l)]}</b>${B.rigClass(l)==='check'?' (pipe size not in the posting summary)':' (est.)'}</p><p class="mut" style="font-size:.85rem">Rough estimate from pipe size and footage in the summary text. Confirm with your drilling engineer and the plans. <a href="/rigs.html">How we estimate</a></p><ul class="chk"><li>Locator / tracking electronics</li><li>Mud mixing system and tank</li><li>Vac truck / vacuum system</li><li>Reamers sized to the product pipe</li></ul></div>
-<div class="card"><h3>Soil &amp; sinkhole risk</h3><div class="soonbox"><b>Coming soon.</b> USDA soil series and FGS sinkhole screening for this location. Screening only, not a geotechnical report.</div></div>
-<div class="card"><h3>Permit route &amp; price benchmarks</h3><div class="soonbox"><b>Coming soon.</b> State-road (FDOT) vs county right-of-way flag for this job. For now see <a href="/benchmarks.html">FDOT statewide benchmarks</a>.</div></div>
+<div class="card"><h3>Soil screening (USDA)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not a geotechnical report.</b> Mapped soil at one point near the job, from USDA NRCS SSURGO via Soil Data Access. Soils change across a bore path; get borings for design.</p>
+<label class="mut">Check soil at<select id="soilpt"></select></label>
+<div id="soilxy" style="display:none;margin-top:8px"><div class="grid two"><label class="mut">Latitude<input id="slat" inputmode="decimal" placeholder="27.2212"></label><label class="mut">Longitude<input id="slon" inputmode="decimal" placeholder="-81.8584"></label></div></div>
+<p style="margin:10px 0 0"><button class="btn s" id="soilgo" type="button">Check soil</button></p><div id="soilout" aria-live="polite"></div>
+<p class="mut" style="font-size:.8rem">Town and county points: U.S. Census Bureau 2024 Gazetteer (internal points), not the job site. For the exact site, pick "Enter job-site coordinates". Full maps: <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx" target="_blank" rel="noopener">Web Soil Survey</a>.</p></div>
+<div class="card"><h3>Sinkhole screening</h3><div class="soonbox"><b>Coming soon.</b> Florida Geological Survey sinkhole screening for this location. Screening only, not a geotechnical report.</div></div>
+<div class="card"><h3>Permit route &amp; price benchmarks</h3><div class="soonbox"><b>Coming soon.</b> State-road (FDOT) vs county right-of-way flag for this job. For now see <a href="/benchmarks.html">FDOT statewide and Southwest Florida market-area benchmarks</a>.</div></div>
 </div>
 <div class="card" style="margin-top:14px"><h3>Need a sub? Available to sub?</h3><p class="mut">Post it on the board and mention ${l.bid?'#'+esc(l.bid):'this lead'}. Bore411 connects crews; it does not bid, take a cut, or share licenses.</p><a class="btn p" href="/#post">I need a sub</a><a class="btn s" href="/#post">I'm available to sub</a></div>`;
 const st=document.getElementById('st'),out=document.getElementById('t811');
 const run=()=>{if(!st.value){out.innerHTML='<p class="mut">Pick a date.</p>';return}const c=B.lastCallDay(st.value);
 out.innerHTML=`<p>Last day to call 811: <b>${B.pretty(c)}</b><br>Earliest legal dig if you call then: <b>${B.pretty(B.earliestDig(c))}</b><br>Ticket good through: <b>${B.pretty(B.ticketExpiry(c))}</b></p>`};
 st.addEventListener('change',run);run();
+const sp=document.getElementById('soilpt'),sxy=document.getElementById('soilxy'),so=document.getElementById('soilout');let C=[];
+const v=x=>x==null||x===''?'—':esc(x);
+function soil(){let lat,lon,lab;if(sp.value==='xy'){lat=document.getElementById('slat').value;lon=document.getElementById('slon').value;lab='your coordinates'}else{const c=C[+sp.value];if(!c)return;lat=c.lat;lon=c.lon;lab=c.label}
+so.innerHTML='<p class="mut">Asking USDA Soil Data Access…</p>';
+B.soilAt(lat,lon).then(M=>{if(!M.length){so.innerHTML='<p class="mut">No mapped soil unit at that point (it may be open water or outside the survey).</p>';return}
+so.innerHTML=M.map(m=>{const wt=B.cmFt(m.wtdepannmin),rk=B.cmFt(m.brockdepmin);return `<div class="tbl"><table><tr><th colspan="2">${esc(m.muname)}<div class="mut" style="font-weight:400">${esc(m.areaname||'')} · map unit ${esc(m.mukey)} · point: ${esc(lab)} (${(+lat).toFixed(4)}, ${(+lon).toFixed(4)})</div></th></tr>
+<tr><td>Major soils</td><td>${m.comps.length?m.comps.map(c=>`${esc(c.compname)} ${v(c.comppct_r)}%${c.taxorder?' ('+esc(c.taxorder)+')':''}`).join('<br>'):'—'}</td></tr>
+<tr><td>Drainage class</td><td>${v(m.drclassdcd)}</td></tr>
+<tr><td>Hydrologic soil group</td><td>${v(m.hydgrpdcd)}</td></tr>
+<tr><td>Shallowest annual water table</td><td>${wt?wt+' ft ('+esc(m.wtdepannmin)+' cm)':'None reported within 200 cm'}</td></tr>
+<tr><td>Depth to bedrock</td><td>${rk?rk+' ft ('+esc(m.brockdepmin)+' cm)':'None reported within 200 cm'}</td></tr>
+<tr><td>Flooding frequency</td><td>${v(m.flodfreqdcd)}</td></tr></table></div>`}).join('')+'<p class="mut" style="font-size:.8rem">Source: USDA NRCS Soil Survey Geographic Database (SSURGO), live query '+esc(new Date().toLocaleDateString('en-US'))+'. Water table and bedrock are SSURGO map-unit values to about 200 cm (6.6 ft) only; deeper limestone and sinkhole conditions are not shown here.</p>'})
+.catch(e=>{so.innerHTML='<p class="mut">Soil lookup failed ('+esc(e.message)+'). Try again or use <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx" target="_blank" rel="noopener">Web Soil Survey</a>.</p>'})}
+fetch('/fl-geo.json').then(r=>r.json()).then(G=>{C=B.geoCandidates(l.location,G);
+sp.innerHTML=C.map((c,i)=>`<option value="${i}">${esc(c.label)}</option>`).join('')+'<option value="xy">Enter job-site coordinates</option>';
+const sync=()=>{sxy.style.display=sp.value==='xy'?'block':'none'};sp.addEventListener('change',()=>{sync();if(sp.value!=='xy')soil()});sync();
+document.getElementById('soilgo').addEventListener('click',soil);
+if(C.length)soil();else so.innerHTML='<p class="mut">The posting gives no specific town or county ('+esc(l.location)+'). Enter job-site coordinates to check soil.</p>'}).catch(()=>{so.innerHTML='<p class="mut">Location list failed to load.</p>'});
 }).catch(()=>el.innerHTML='<p class="mut">Bid package failed to load.</p>');
 </script></body></html>
