@@ -35,7 +35,8 @@ el.innerHTML=`<span class="tag">${l.type==='bid'?'Public bid':'Sub work'}</span>
 <div id="soilxy" style="display:none;margin-top:8px"><div class="grid two"><label class="mut">Latitude<input id="slat" inputmode="decimal" placeholder="27.2212"></label><label class="mut">Longitude<input id="slon" inputmode="decimal" placeholder="-81.8584"></label></div></div>
 <p style="margin:10px 0 0"><button class="btn s" id="soilgo" type="button">Check soil</button></p><div id="soilout" aria-live="polite"></div>
 <p class="mut" style="font-size:.8rem">Town and county points: U.S. Census Bureau 2024 Gazetteer (internal points), not the job site. For the exact site, pick "Enter job-site coordinates". Full maps: <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx" target="_blank" rel="noopener">Web Soil Survey</a>.</p></div>
-<div class="card"><h3>Sinkhole screening</h3><div class="soonbox"><b>Coming soon.</b> Florida Geological Survey sinkhole screening for this location. Screening only, not a geotechnical report.</div></div>
+<div class="card"><h3>Sinkhole screening (FGS)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not a geotechnical report.</b> Reported subsidence incidents near the point picked in the soil card, from the Florida Geological Survey database (FDEP open data). Most reports were never field-checked; no reports nearby does <i>not</i> mean no sinkhole risk.</p><div id="sinkout" aria-live="polite"><p class="mut">Pick a point in the soil card.</p></div>
+<p class="mut" style="font-size:.8rem">Source: <a href="https://ags.dep.state.fl.us/arcgis/rest/services/OpenData/FGS_SUBSIDENCE/MapServer/0" target="_blank" rel="noopener">FDEP / Florida Geological Survey, Subsidence Incident Reports</a> · <a href="https://floridadep.gov/fgs/sinkholes" target="_blank" rel="noopener">FGS sinkhole info</a>. Owner and reporter details are not shown.</p></div>
 <div class="card"><h3>Permit route &amp; price benchmarks</h3><div class="soonbox"><b>Coming soon.</b> State-road (FDOT) vs county right-of-way flag for this job. For now see <a href="/benchmarks.html">FDOT statewide and Southwest Florida market-area benchmarks</a>.</div></div>
 </div>
 <div class="card" style="margin-top:14px"><h3>Need a sub? Available to sub?</h3><p class="mut">Post it on the board and mention ${l.bid?'#'+esc(l.bid):'this lead'}. Bore411 connects crews; it does not bid, take a cut, or share licenses.</p><a class="btn p" href="/#post">I need a sub</a><a class="btn s" href="/#post">I'm available to sub</a></div>`;
@@ -45,8 +46,17 @@ out.innerHTML=`<p>Last day to call 811: <b>${B.pretty(c)}</b><br>Earliest legal 
 st.addEventListener('change',run);run();
 const sp=document.getElementById('soilpt'),sxy=document.getElementById('soilxy'),so=document.getElementById('soilout');let C=[];
 const v=x=>x==null||x===''?'—':esc(x);
+const ko=document.getElementById('sinkout'),TS={Y:'Yes',N:'No',U:'Unknown'};
+function sink(lat,lon,lab){ko.innerHTML='<p class="mut">Asking Florida Geological Survey…</p>';
+B.sinkAt(lat,lon,10).then(r=>{const w=r.within,sz=a=>[a.SINLNGTH,a.SINWIDTH,a.SINDEPTH].some(x=>x!=null)?[a.SINLNGTH,a.SINWIDTH,a.SINDEPTH].map(x=>x==null?'?':esc(x)).join(' × ')+' ft':'—';
+ko.innerHTML=`<div class="tbl"><table><tr><th colspan="2">Reported incidents near ${esc(lab)} (${(+lat).toFixed(4)}, ${(+lon).toFixed(4)})</th></tr>
+<tr><td>Within 1 mile</td><td><b>${w[1]}</b></td></tr><tr><td>Within 3 miles</td><td><b>${w[3]}</b></td></tr><tr><td>Within 5 miles</td><td><b>${w[5]}</b></td></tr><tr><td>Within 10 miles</td><td><b>${w[10]}</b>${r.capped?' (1,000+; list capped)':''}</td></tr>
+<tr><td>Field-verified sinkholes (10 mi)</td><td>${r.verified}</td></tr></table></div>`+
+(r.reports.length?`<p class="mut" style="margin:10px 0 4px">Nearest reports:</p><div class="tbl"><table><tr><th>FGS ref #</th><th>Distance</th><th>Reported</th><th>Verified sinkhole</th><th>Size L × W × D</th></tr>${r.reports.slice(0,5).map(a=>`<tr><td>${esc(a.REF_NUM)}</td><td>${a.mi.toFixed(1)} mi</td><td>${a.EVENT_DATE!=null?esc(B.fgsDate(a.EVENT_DATE)):'—'}</td><td>${esc(TS[a.TRUE_SINK]||'Unknown')}</td><td>${sz(a)}</td></tr>`).join('')}</table></div>`:'<p class="mut" style="margin-top:8px">No reported incidents within 10 miles in the FGS database. That is not a clearance: karst can be present without any reports.</p>')+
+`<p class="mut" style="font-size:.8rem">Live query ${esc(new Date().toLocaleDateString('en-US'))}. Database: ${r.total?esc(r.total.toLocaleString('en-US'))+' statewide reports, ':''}${r.revised?'newest reported event '+esc(B.fgsDate(r.revised)):'newest event date not reported'}. Distances are straight-line from the point to the reported location; report locations can be approximate.</p>`})
+.catch(e=>{ko.innerHTML='<p class="mut">Sinkhole lookup failed ('+esc(e.message)+'). Try again later or see <a href="https://floridadep.gov/fgs/sinkholes" target="_blank" rel="noopener">FGS sinkholes</a>.</p>'})}
 function soil(){let lat,lon,lab;if(sp.value==='xy'){lat=document.getElementById('slat').value;lon=document.getElementById('slon').value;lab='your coordinates'}else{const c=C[+sp.value];if(!c)return;lat=c.lat;lon=c.lon;lab=c.label}
-so.innerHTML='<p class="mut">Asking USDA Soil Data Access…</p>';
+so.innerHTML='<p class="mut">Asking USDA Soil Data Access…</p>';sink(lat,lon,lab);
 B.soilAt(lat,lon).then(M=>{if(!M.length){so.innerHTML='<p class="mut">No mapped soil unit at that point (it may be open water or outside the survey).</p>';return}
 so.innerHTML=M.map(m=>{const wt=B.cmFt(m.wtdepannmin),rk=B.cmFt(m.brockdepmin);return `<div class="tbl"><table><tr><th colspan="2">${esc(m.muname)}<div class="mut" style="font-weight:400">${esc(m.areaname||'')} · map unit ${esc(m.mukey)} · point: ${esc(lab)} (${(+lat).toFixed(4)}, ${(+lon).toFixed(4)})</div></th></tr>
 <tr><td>Major soils</td><td>${m.comps.length?m.comps.map(c=>`${esc(c.compname)} ${v(c.comppct_r)}%${c.taxorder?' ('+esc(c.taxorder)+')':''}`).join('<br>'):'—'}</td></tr>
@@ -54,12 +64,12 @@ so.innerHTML=M.map(m=>{const wt=B.cmFt(m.wtdepannmin),rk=B.cmFt(m.brockdepmin);r
 <tr><td>Hydrologic soil group</td><td>${v(m.hydgrpdcd)}</td></tr>
 <tr><td>Shallowest annual water table</td><td>${wt?wt+' ft ('+esc(m.wtdepannmin)+' cm)':'None reported within 200 cm'}</td></tr>
 <tr><td>Depth to bedrock</td><td>${rk?rk+' ft ('+esc(m.brockdepmin)+' cm)':'None reported within 200 cm'}</td></tr>
-<tr><td>Flooding frequency</td><td>${v(m.flodfreqdcd)}</td></tr></table></div>`}).join('')+'<p class="mut" style="font-size:.8rem">Source: USDA NRCS Soil Survey Geographic Database (SSURGO), live query '+esc(new Date().toLocaleDateString('en-US'))+'. Water table and bedrock are SSURGO map-unit values to about 200 cm (6.6 ft) only; deeper limestone and sinkhole conditions are not shown here.</p>'})
+<tr><td>Flooding frequency</td><td>${v(m.flodfreqdcd)}</td></tr></table></div>`}).join('')+'<p class="mut" style="font-size:.8rem">Source: USDA NRCS Soil Survey Geographic Database (SSURGO), live query '+esc(new Date().toLocaleDateString('en-US'))+'. Water table and bedrock are SSURGO map-unit values to about 200 cm (6.6 ft) only; deeper limestone is not shown here; see the sinkhole card.</p>'})
 .catch(e=>{so.innerHTML='<p class="mut">Soil lookup failed ('+esc(e.message)+'). Try again or use <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx" target="_blank" rel="noopener">Web Soil Survey</a>.</p>'})}
 fetch('/fl-geo.json').then(r=>r.json()).then(G=>{C=B.geoCandidates(l.location,G);
 sp.innerHTML=C.map((c,i)=>`<option value="${i}">${esc(c.label)}</option>`).join('')+'<option value="xy">Enter job-site coordinates</option>';
 const sync=()=>{sxy.style.display=sp.value==='xy'?'block':'none'};sp.addEventListener('change',()=>{sync();if(sp.value!=='xy')soil()});sync();
 document.getElementById('soilgo').addEventListener('click',soil);
-if(C.length)soil();else so.innerHTML='<p class="mut">The posting gives no specific town or county ('+esc(l.location)+'). Enter job-site coordinates to check soil.</p>'}).catch(()=>{so.innerHTML='<p class="mut">Location list failed to load.</p>'});
+if(C.length)soil();else{ko.innerHTML='<p class="mut">Enter job-site coordinates in the soil card to screen for reported sinkholes.</p>';so.innerHTML='<p class="mut">The posting gives no specific town or county ('+esc(l.location)+'). Enter job-site coordinates to check soil.</p>'}}).catch(()=>{so.innerHTML='<p class="mut">Location list failed to load.</p>'});
 }).catch(()=>el.innerHTML='<p class="mut">Bid package failed to load.</p>');
 </script></body></html>

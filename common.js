@@ -85,6 +85,22 @@ function soilAt(lat,lon){lat=+lat;lon=+lon;if(!isFinite(lat)||!isFinite(lon)||la
   sdaQuery(`SELECT c.mukey, c.compname, c.comppct_r, c.drainagecl, c.hydgrp, c.taxorder FROM component c WHERE c.majcompflag='Yes' AND c.mukey IN (${sub}) ORDER BY c.comppct_r DESC`)]).then(([mu,co])=>mu.map(m=>Object.assign(m,{comps:co.filter(c=>c.mukey===m.mukey)})))}
 const cmFt=cm=>cm==null||cm===''?null:(cm/30.48).toFixed(1);
 
-const API={geoCandidates,soilAt,cmFt,RIG,rigClass,rigFor,esc,leadId,dueOf,fmtET,holidays,isBiz,earliestDig,ticketExpiry,lastCallDay,pretty,ymd,parse};
+/* ---- Florida Geological Survey subsidence incident reports (FDEP open data, ArcGIS REST) ---- */
+const FGS='https://ags.dep.state.fl.us/arcgis/rest/services/OpenData/FGS_SUBSIDENCE/MapServer/0/query';
+const FGS_FIELDS='REF_NUM,EVENT_DATE,TRUE_SINK,LATDD,LONGDD,SINLNGTH,SINWIDTH,SINDEPTH,COUNTY,ACCURACY'; // no owner/reporter fields
+function miles(a,b,c,d){const R=3958.8,r=x=>x*Math.PI/180,dl=r(c-a),dn=r(d-b),h=Math.sin(dl/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(h)))}
+function fgsGet(params){const u=FGS+'?'+new URLSearchParams(Object.assign({f:'json'},params));return fetch(u).then(r=>{if(!r.ok)throw new Error('FGS '+r.status);return r.json()}).then(j=>{if(j.error)throw new Error('FGS '+(j.error.message||'error'));return j})}
+/* Reports within `radius` miles of a point, sorted by distance, plus database last-revised date. */
+function sinkAt(lat,lon,radius=10){lat=+lat;lon=+lon;if(!isFinite(lat)||!isFinite(lon)||lat<24||lat>31.1||lon<-87.7||lon>-79.8)return Promise.reject(new Error('Point is outside Florida'));
+ const geo={geometry:lon.toFixed(5)+','+lat.toFixed(5),geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(radius),units:'esriSRUnit_StatuteMile',where:'1=1'};
+ return Promise.all([fgsGet(Object.assign({},geo,{outFields:FGS_FIELDS,returnGeometry:'false',resultRecordCount:'1000'})),
+  fgsGet({where:'1=1',outStatistics:JSON.stringify([{statisticType:'max',onStatisticField:'EVENT_DATE',outStatisticFieldName:'m'},{statisticType:'count',onStatisticField:'OBJECTID',outStatisticFieldName:'n'}])}).catch(()=>null)])
+ .then(([j,st])=>{const R=(j.features||[]).map(f=>f.attributes).filter(a=>isFinite(a.LATDD)&&isFinite(a.LONGDD)).map(a=>Object.assign(a,{mi:miles(lat,lon,a.LATDD,a.LONGDD)})).filter(a=>a.mi<=radius+0.05).sort((x,y)=>x.mi-y.mi);
+  const sa=st&&st.features&&st.features[0]?st.features[0].attributes:{};const g=k=>sa[k]!=null?sa[k]:sa[k.toUpperCase()];
+  const cnt=r=>R.filter(a=>a.mi<=r).length;
+  return {radius,reports:R,within:{1:cnt(1),3:cnt(3),5:cnt(5),[radius]:R.length},verified:R.filter(a=>a.TRUE_SINK==='Y').length,capped:(j.features||[]).length>=1000||!!j.exceededTransferLimit,revised:g('m')||null,total:g('n')||null}})}
+const fgsDate=ms=>ms==null?null:new Date(ms).toLocaleDateString('en-US',{timeZone:'UTC',year:'numeric',month:'short',day:'numeric'});
+
+const API={geoCandidates,soilAt,sinkAt,miles,fgsDate,cmFt,RIG,rigClass,rigFor,esc,leadId,dueOf,fmtET,holidays,isBiz,earliestDig,ticketExpiry,lastCallDay,pretty,ymd,parse};
 if(typeof module!=='undefined')module.exports=API;else G.B411=API;
 })(this);
