@@ -3,7 +3,7 @@
 <link rel="canonical" href="https://bore411.com/"><meta property="og:type" content="website"><meta property="og:site_name" content="Bore411"><meta property="og:title" content="Bore411 — The load board for underground work"><meta property="og:description" content="Every underground lead in one place: HDD, boring and trenching bids and sub work in Florida, with bid packages, an 811 dig-date calculator and FDOT price benchmarks."><meta property="og:url" content="https://bore411.com/"><meta property="og:image" content="https://bore411.com/images/hero-hdd-rig-v2.jpg"><meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/style.css"></head><body>
 <div class="apwa" aria-hidden="true"><i style="background:#e4002b"></i><i style="background:#ffd100"></i><i style="background:#ff6a13"></i><i style="background:#0072ce"></i><i style="background:#a05eb5"></i><i style="background:#43b02a"></i><i style="background:#fff"></i><i style="background:#ff69b4"></i></div>
-<div class="wrap"><header class="top"><a class="logo" href="/" style="text-decoration:none;color:var(--txt)">BORE<b>411</b></a><nav class="links"><a href="/#leads">Leads</a><a href="/tools.html">811 calculator</a><a href="/benchmarks.html">Price benchmarks</a><a href="/rigs.html">Rig sizes</a><a href="/equipment.html">Equipment</a><a href="/#alerts">Get alerts</a></nav></header></div>
+<div class="wrap"><header class="top"><a class="logo" href="/" style="text-decoration:none;color:var(--txt)">BORE<b>411</b></a><nav class="links"><a href="/#leads">Leads</a><a href="/tools.html">811 calculator</a><a href="/calc.html">Bore calculators</a><a href="/benchmarks.html">Price benchmarks</a><a href="/rigs.html">Rig sizes</a><a href="/equipment.html">Equipment</a><a href="/#alerts">Get alerts</a></nav></header></div>
 <div class="hero photo" role="img" aria-label="Horizontal directional drilling rig on a Florida roadside at sunset (illustrative AI image)"><div class="wrap"><span class="kick">The Florida HDD bid desk</span><h1>The load board for<br>underground work.</h1><p>Every lead in one place, built by a driller. HDD, boring and trenching bids and sub work, with a bid package for each lead, 811 dig dates and real FDOT price benchmarks.</p>
 <a class="btn p" href="#leads">Find bore work</a><a class="btn s" href="#post">Post a bore</a></div></div>
 <div class="wrap">
@@ -36,7 +36,7 @@ const{esc,leadId,dueOf,fmtET,rigClass,RIG}=B411;
 let ALL=[],RF='';
 function draw(L){const now=new Date(),f=document.getElementById('feed');
 const t=l=>dueOf(l)?new Date(dueOf(l)).getTime():9e15;
-const open=L.filter(l=>(!RF||rigClass(l)===RF)&&!dueOf(l)||new Date(dueOf(l))>now).sort((a,b)=>t(a)-t(b));
+const open=L.filter(l=>(!RF||rigClass(l)===RF)&&(!dueOf(l)||new Date(dueOf(l))>now)).sort((a,b)=>t(a)-t(b));
 f.innerHTML=open.length?open.map(l=>{const d=dueOf(l)?new Date(dueOf(l)):null,days=d?(d-now)/864e5:null,href='/bid.html?id='+encodeURIComponent(leadId(l));
 return `<div class="card"><span class="tag">${l.type==='bid'?'Public bid':'Sub work'}</span><a class="tag rig r-${rigClass(l)}" href="/rigs.html" title="Estimated from the scope text. Rough estimate.">${RIG[rigClass(l)]}${rigClass(l)==='check'?'':' (est.)'}</a>${l.bid?`<span class="mut">#${esc(l.bid)}</span>`:''}
 <h3><a href="${href}" style="color:var(--txt);text-decoration:none">${esc(l.title)}</a></h3><div class="mut">${esc(l.agency)} · ${esc(l.location)}</div><p>${esc(l.scope)}</p>
