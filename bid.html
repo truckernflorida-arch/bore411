@@ -17,6 +17,9 @@ const st=/\bFDOT\b|department of transportation|\b(SR|S\.R\.|state road|US|U\.S\
 let h='';if(st)h+='<p><b>State road mentioned.</b> The posting mentions FDOT or a state/U.S. route. Utility work on state right-of-way is permitted by FDOT through <a href="https://osp.fdot.gov/" target="_blank" rel="noopener">One Stop Permitting</a>.</p>';
 h+=hits.length?'<p>County right-of-way cheat sheet: '+hits.map(c=>'<a href="/permits.html#'+c[0]+'">'+c[1]+' County</a>').join(', ')+'.</p>':'<p class="mut">This job\'s county is not in our cheat sheets yet. We cover 10 counties near Arcadia: <a href="/permits.html">see the list</a>.</p>';
 return h}
+function gisCard(l){const t=[l.title,l.agency,l.location,l.scope].join(' . ');const hits=PC.filter(c=>c[2].test(t));const st=/\bFDOT\b|department of transportation|\b(SR|S\.R\.|state road|US|U\.S\.)[ -]?\d+|\binterstate\b|\bI-\d+/i.test(t);
+let h=hits.map(c=>'<p><b>'+c[1]+' County</b></p>'+B.gisHtml(c[0])).join('');if(st)h+='<p><b>State road (FDOT)</b></p>'+B.gisHtml('fdot');
+return h||'<p class="mut">County not detected from the posting. See <a href="/permits.html#gis">GIS map links for all 10 counties</a>.</p>'}
 fetch('/leads.json').then(r=>r.json()).then(L=>{const l=L.find(x=>B.leadId(x)===id);
 if(!l){el.innerHTML='<h2>Lead not found</h2><p class="mut">It may have expired or been updated. <a href="/#leads">See today\'s leads</a>.</p>';return}
 document.title=l.title+' — Bore411 bid package';const s=l.scope||'',due=B.dueOf(l),d=due?new Date(due):null;
@@ -44,6 +47,7 @@ el.innerHTML=`<span class="tag">${l.type==='bid'?'Public bid':'Sub work'}</span>
 <div class="card"><h3>Sinkhole screening (FGS)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not a geotechnical report.</b> Reported subsidence incidents near the point picked in the soil card, from the Florida Geological Survey database (FDEP open data). Most reports were never field-checked; no reports nearby does <i>not</i> mean no sinkhole risk.</p><div id="sinkout" aria-live="polite"><p class="mut">Pick a point in the soil card.</p></div>
 <p class="mut" style="font-size:.8rem">Source: <a href="https://ags.dep.state.fl.us/arcgis/rest/services/OpenData/FGS_SUBSIDENCE/MapServer/0" target="_blank" rel="noopener">FDEP / Florida Geological Survey, Subsidence Incident Reports</a> · <a href="https://floridadep.gov/fgs/sinkholes" target="_blank" rel="noopener">FGS sinkhole info</a>. Owner and reporter details are not shown.</p></div>
 <div class="card"><h3>Permit route &amp; price benchmarks</h3>${permitRoute(l)}<p class="mut" style="font-size:.8rem">Flags come from words in the posting, not a road-ownership lookup. Confirm who owns each road on the bore path. Prices: <a href="/benchmarks.html">FDOT statewide and Southwest Florida market-area benchmarks</a>.</p></div>
+<div class="card"><h3>County GIS map</h3>${gisCard(l)}<p class="mut" style="font-size:.8rem"><b>Reference only.</b> These are the county's or FDOT's own public maps; Bore411 does not host or vouch for the data. Always rely on your Sunshine 811 locate tickets and field verification (Florida Statute 556).</p></div>
 </div>
 <div class="card" style="margin-top:14px"><h3>Need a sub? Available to sub?</h3><p class="mut">Post it on the board and mention ${l.bid?'#'+esc(l.bid):'this lead'}. Bore411 connects crews; it does not bid, take a cut, or share licenses.</p><a class="btn p" href="/#post">I need a sub</a><a class="btn s" href="/#post">I'm available to sub</a></div>`;
 const st=document.getElementById('st'),out=document.getElementById('t811');

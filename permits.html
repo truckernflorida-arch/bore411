@@ -12,7 +12,7 @@
 <div class="card"><h3>State road (FDOT)</h3><p>All ten counties below are in <b>FDOT District One</b>. Utility work on state-road right-of-way is permitted by FDOT through <a href="https://osp.fdot.gov/" target="_blank" rel="noopener">One Stop Permitting (OSP)</a>, not by the county.</p><p class="src">Sources: <a href="https://www.fdot.gov/programmanagement/utilities/default.shtm" target="_blank" rel="noopener">FDOT Utilities Office</a> · <a href="https://www.fdot.gov/programmanagement/utilities/d1info.shtm" target="_blank" rel="noopener">FDOT District One utilities</a> · <a href="https://www.fdot.gov/publications/distmap/d1map.shtm" target="_blank" rel="noopener">District One county map</a>.</p></div>
 <div class="card"><h3>County road or city street</h3><p>County-maintained roads go through the county office listed below. Streets inside a city (for example Arcadia, Punta Gorda, Sebring, Wauchula, Fort Myers, Cape Coral) are usually permitted by the city, so check with the city when the job is inside city limits. One bore can cross more than one owner, which can mean more than one permit.</p></div>
 </div>
-<nav class="jump" aria-label="Jump to county"><a href="#desoto">DeSoto</a><a href="#charlotte">Charlotte</a><a href="#hardee">Hardee</a><a href="#highlands">Highlands</a><a href="#sarasota">Sarasota</a><a href="#manatee">Manatee</a><a href="#lee">Lee</a><a href="#glades">Glades</a><a href="#hendry">Hendry</a><a href="#polk">Polk</a></nav>
+<nav class="jump" aria-label="Jump to county"><a href="#desoto">DeSoto</a><a href="#charlotte">Charlotte</a><a href="#hardee">Hardee</a><a href="#highlands">Highlands</a><a href="#sarasota">Sarasota</a><a href="#manatee">Manatee</a><a href="#lee">Lee</a><a href="#glades">Glades</a><a href="#hendry">Hendry</a><a href="#polk">Polk</a><a href="#gis">GIS maps</a></nav>
 <div class="grid two" style="margin-top:14px">
 
 <div class="card" id="desoto"><h3>DeSoto County</h3><p>Permit: <b>Right-of-Way Permit</b> from DeSoto County Engineering, for work that encroaches on county-maintained roads.</p><ul>
@@ -77,6 +77,10 @@
 <li>Utility permit fee: data being compiled.</li></ul>
 <p class="src">Source: <a href="https://www.polkfl.gov/public-safety/roads-and-drainage/" target="_blank" rel="noopener">Polk County Roads and Drainage</a></p></div>
 </div>
+<h2 id="gis" style="margin-top:22px">County GIS maps</h2>
+<div class="warn"><b>Reference only.</b> Links go to each county's or FDOT's own public map viewer; Bore411 does not host or vouch for the data. County maps are not locates: always rely on your Sunshine 811 tickets and field verification (F.S. 556).</div>
+<div class="grid two" id="gisgrid" style="margin-top:14px"></div>
+<script src="/common.js"></script><script>document.getElementById('gisgrid').innerHTML=Object.keys(B411.GIS).map(k=>'<div class="card" id="gis-'+k+'"><h3>'+B411.GIS[k].name+(k==='fdot'?'':' County')+' GIS maps</h3>'+B411.gisHtml(k)+'</div>').join('')</script>
 <p class="mut" style="margin-top:18px">Prices for bore and conduit work in these counties: <a href="/benchmarks.html">FDOT market-area benchmarks</a>. Dig dates: <a href="/tools.html">811 calculator</a>. See something out of date? Tell us through the <a href="/#post">post form</a>.</p>
 </section></div>
 <footer><div class="wrap">Leads link to original sources; verify details with the issuing agency. Bore411 is not affiliated with listed agencies or sources. Bore411 is a free information board: it does not bid work, take a percentage of any job, or hold or share contractor licenses.<br>Photos on this site are illustrative AI-generated images, not real Bore411 jobs or crews.<br>© 2026 Bore411</div></footer>
