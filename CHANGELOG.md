@@ -1,5 +1,9 @@
 # Bore411 changelog
 
+## 2026-11-01
+- New `permits.html` "ROW permits" page, linked in the nav on every page: right-of-way permit cheat sheets for the 10 counties around Arcadia (DeSoto, Charlotte, Hardee, Highlands, Sarasota, Manatee, Lee, Glades, Hendry, Polk) and FDOT state roads (all in FDOT District One, permitted through One Stop Permitting). Each county lists the permit name and issuing office plus what the county's own pages publish (for example Charlotte's $140 review fee and fiber-permit fee note, Highlands' $400 General Utility Permit, Hendry's 30-inch/18-inch crossing depths and 5-foot bore-past-pavement rule, DeSoto's 6-month permit term, Polk's 10-working-day lane closure lead time). Every item links to the official source; anything not published shows "data being compiled". Checked November 1, 2026.
+- Bid pages: the "Permit route" card is live (was "coming soon"). It links the county cheat sheet when the lead names one of the 10 counties or a major town in them, and flags postings that mention FDOT or a state/U.S. route. Labeled as a text match, not a road-ownership lookup.
+
 ## 2026-10-31
 - New `calc.html` "Bore calculators" page, linked in the nav on every page: backreamer size for 1 to 7 IPS conduits or a typed bundle OD (minimum 1.5x OD, PPI TN-63 4.3.2); drilling fluid volume (diameter squared / 24.5 gal/ft, 2-3x in sand, 3-5x in clay, The Driller) with gallons and minutes per rod at a pump rate; HDPE conduit safe pull strength from PPI TN-63 (2021) Tables 3-5 (SDR 9-17, Schedule 40/80, standard and higher-strength compound), with time-under-tension and temperature factors. Formulas and sources shown on the page; results labeled estimates.
 - Fix: home-page rig-size filter showed leads from other rig classes whenever they had a future due date (operator-precedence bug in the open-lead filter).
