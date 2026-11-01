@@ -18,5 +18,5 @@ Free load board and Florida HDD bid desk for underground work (HDD, boring, tren
 
 Changes are logged in `CHANGELOG.md`.
 
-Images in `/images` are illustrative AI-generated pictures, not real Bore411 jobs or crews.
+Images in `/images` are illustrative AI-generated pictures, not real Bore411 jobs or crews. The home hero (`hero-hdd-rig-v3.jpg`) is modeled on a real tracked HDD rig: inclined rack, rod entering the ground at an angle at the front, nothing out the back.
 Bore411 does not bid work, take a percentage of any job, or hold or share contractor licenses. Public information only.
