@@ -1,5 +1,9 @@
 # Bore411 changelog
 
+## 2026-11-02
+- New county landing pages for search: `counties.html` plus `county/desoto.html`, `charlotte`, `hardee`, `highlands`, `sarasota`, `manatee`, `lee`, `glades`, `hendry` and `polk`. Each page has its own title and description ("{County} County, FL HDD & underground utility bids"), breadcrumb structured data, open leads that name the county, other open leads within 50 miles (straight-line from the county center), the county's ROW permit cheat sheet and official GIS map links (same sourced content as `permits.html`, checked Nov 1, 2026), its FDOT market area and District One / One Stop Permitting note, and a live USDA soil and FGS sinkhole screen at the county center or main towns (labeled screening-level). Added to `sitemap.xml`; linked from the home leads section and the permits page.
+- Fix: home page still said soil, sinkhole and permit route were "coming soon"; they have been live on bid pages since Oct 29 to Nov 1.
+
 ## 2026-11-01
 - Link previews and default hero background: all pages' `og:image` now point to absolute `https://bore411.com/images/hero-hdd-rig-v3.jpg` (with og:image:width 1280 / height 720), and `style.css` `.hero.photo` defaults to v3 instead of the old derrick-style `hero-hdd-rig.jpg`.
 - Home hero image: replaced with `images/hero-hdd-rig-v3.jpg` (illustrative AI image modeled on a real yellow tracked HDD rig). The v2 hero wrongly showed a tube going straight down from the back of the rig, like a water-well rig; on an HDD rig the drill rod enters the ground at a shallow angle from the low front of the inclined rack, with only the stabilizer/vise there and nothing out the back. `index.html` loads v3 and falls back to v2 if v3 is missing.
