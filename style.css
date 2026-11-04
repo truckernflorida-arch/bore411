@@ -37,3 +37,6 @@ table{width:100%;border-collapse:collapse;font-size:.92rem}th,td{text-align:left
 .filt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}.filt button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-weight:700;cursor:pointer;font-size:.85rem}.filt button.on{background:var(--or);color:#111;border-color:var(--or)}
 a.tag.rig{text-decoration:none;background:#1f2a33;color:#8fc7ff}a.tag.r-check{background:#2b2b2b;color:var(--mut)}
 @media(max-width:600px){header.top{flex-direction:column;align-items:flex-start}nav.links{width:100%;gap:8px 14px}}
+/* --- v4: keyboard focus, skip motion --- */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[role=tab]:focus-visible{outline:3px solid #ffd100;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
