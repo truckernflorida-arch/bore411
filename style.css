@@ -40,3 +40,17 @@ a.tag.rig{text-decoration:none;background:#1f2a33;color:#8fc7ff}a.tag.r-check{ba
 /* --- v4: keyboard focus, skip motion --- */
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[role=tab]:focus-visible{outline:3px solid #ffd100;outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* --- v5: marks page --- */
+.swatch{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;margin:0 0 10px}
+.swatch i{display:block;height:40px;border-radius:8px;border:1px solid var(--line)}
+.swatch b{display:block}
+.tz{display:flex;align-items:center;gap:0;margin:12px 0;font-size:.8rem;font-weight:800}
+.tz span{padding:10px 8px;text-align:center}
+.tz .z{background:#3a3128;color:#ffd100;flex:1;border:1px dashed #6b6255}
+.tz .f{background:#ff6a13;color:#111;min-width:64px}
+.big{font-size:1.6rem;font-weight:900;margin:6px 0}
+.warn{background:#2a231c;border-left:4px solid #ffd100;padding:12px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.out p{margin:6px 0}.ok{color:#7dcea0;font-weight:800}.no{color:#f5a3a3;font-weight:800}.soon{color:#ffd23f;font-weight:800}
+.mark label{display:block;font-size:.85rem;color:var(--mut);margin:0 0 4px}
+.mark .grid.two{grid-template-columns:1fr}@media(min-width:760px){.mark .grid.two{grid-template-columns:1fr 1fr}}

@@ -1,5 +1,8 @@
 # Bore411 changelog
 
+## 2026-11-06
+- New `marks.html` "Marks & cover" page, linked in the nav on every page (after the 811 calculator): APWA Uniform Color Codes as used by Sunshine 811; a Florida tolerance-zone width calculator (24 in from each outside edge of the facility, per Sunshine 811 FAQ / Chapter 556); FDOT UAM 2017 minimum cover cards (36 in under roadway pavement, 30 in under unpaved/other pavement, 48 in under limited-access crossings); and HDD helpers for max bored diameter by product OD and minimum depth under roadway pavement at 10× bored diameter (UAM §§3.16.4, 3.16.9.1, 4.3.3, incorporated by Rule 14-46.001, F.A.C.). Sources and the Nov 6, 2026 check date are on the page. Linked from the 811 calculator, home desk checklist, and bid-package 811 card. Informational only — not a locate or a permit.
+
 ## 2026-11-05
 - New `crews.html` "Crew directory" plus empty `crews.json` (hand-reviewed; no invented companies). Free public profiles for licensed Florida HDD and underground crews near Arcadia: company, DBPR license # (with link to the DBPR search so the user verifies), license type, counties, rig class, services, website and about. Phone and email are never published. County and rig filters; `?id=<slug>` detail view with a "Message this crew" Formspree form (`form_type=crew_message`, job-post endpoint). "List your crew" form (`form_type=crew_profile`, `_subject=Bore411 crew profile`) collects contact for review only. Intro cites F.S. 489.129(1)(e); "Before you hire" covers DBPR, Sunbiz, COI, E-Verify and per-excavator 811 (556.105). Bore411 does not bid, take a cut, or share licenses. Added to nav (before Equipment) on every page, home desk buttons, bid-page sub card, sitemap, and regenerated county pages.
 
