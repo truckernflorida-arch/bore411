@@ -1,5 +1,8 @@
 # Bore411 changelog
 
+## 2026-11-07
+- Bore calculators (`calc.html`): new card 4, "Pullback force estimate (mini-HDD)". Pick IPS size, SDR 9–17, number of conduits, horizontal pull length, planned 90° bends and drill rod diameter; it estimates the pull on the conduit at the end of the pull with the PPI Handbook of PE Pipe, Chapter 12 (revised May 2026) mini-HDD method, Eqs. 22–25: F = w_b × L/3 × 1.6^n, w_b = OD²/2 − pipe weight, unplanned path corrections = 2L/(500 × rod diameter). Pipe weight uses minimum wall and 0.947 g/cm³ (low end of the ASTM D3350 PE4710 density cell). It compares the result per conduit with the TN-63 1-hour safe pull already on the page and flags when the estimate is over the standard-strength limit. Formula, source and Nov 7, 2026 check date added to "Formulas and sources". Labeled an estimate; not for maxi-HDD (ASTM F1962).
+
 ## 2026-11-06
 - New `marks.html` "Marks & cover" page, linked in the nav on every page (after the 811 calculator): APWA Uniform Color Codes as used by Sunshine 811; a Florida tolerance-zone width calculator (24 in from each outside edge of the facility, per Sunshine 811 FAQ / Chapter 556); FDOT UAM 2017 minimum cover cards (36 in under roadway pavement, 30 in under unpaved/other pavement, 48 in under limited-access crossings); and HDD helpers for max bored diameter by product OD and minimum depth under roadway pavement at 10× bored diameter (UAM §§3.16.4, 3.16.9.1, 4.3.3, incorporated by Rule 14-46.001, F.A.C.). Sources and the Nov 6, 2026 check date are on the page. Linked from the 811 calculator, home desk checklist, and bid-package 811 card. Informational only — not a locate or a permit.
 
