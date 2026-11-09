@@ -1,5 +1,9 @@
 # Bore411 changelog
 
+## 2026-11-09
+- Home lead feed: new "Near" filter. Type your town or county (any of the 949 Florida places and 67 counties in `fl-geo.json`, U.S. Census Bureau 2024 Gazetteer), choose within 25, 50, 100 or 150 miles or any distance, and sort by due date or nearest. Each lead shows about how far it is from your town in straight-line miles (town or county centers, not road miles; labeled on the page). Leads farther than the radius are hidden with a count and a "show all distances" link; statewide leads and leads with no stated area stay in the list, labeled.
+- Saved leads: a star on every lead card and a "Save lead" button on bid pages. The "Saved" button on the feed shows only your saved open leads. Your town, radius, sort and saved leads stay in your browser (localStorage) and are not sent to Bore411.
+
 ## 2026-11-08
 - Bore calculators (`calc.html`): new card 5, "Bore path planner: setback to reach depth". Enter entry pitch (%), the depth where the bore should level out, the rod maker's minimum bend radius and rod length (presets: Ditch Witch JT2020 rod, 114 ft / 10 ft, and Vermeer D100x120 Firestick rod, 207 ft / 20 ft, from Premier Drill Products spec sheets) and a planning factor (default 1.5× the rod minimum, because those limits are for pure bending only; the factor is a Bore411 choice, labeled as such). It shows the horizontal setback from entry to level, the straight and bend segments, rods needed, and degrees / % pitch change per rod; if the bend can't level out that shallow it gives the steepest entry pitch that can. Optional pipe check against the HDPE cold bend minimum (20/25/27× OD by DR, PPI TN-27 Q. 60) and the 40× OD ovaling limit noted in PPI Handbook Ch. 12, using bundle OD for several conduits. Formulas and sources added; checked Nov 8, 2026. Estimate only.
 
