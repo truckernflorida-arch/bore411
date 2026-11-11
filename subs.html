@@ -57,4 +57,5 @@ document.querySelectorAll('#ol button').forEach(b=>b.addEventListener('click',()
 const id=q.get('lead');if(id&&OPEN.some(l=>leadId(l)===id))pick(q.get('as')==='av'?'av':'need',id);else if(q.get('as')==='av')show('av');
 }).catch(()=>{document.getElementById('ol').innerHTML='<p class="mut">Leads failed to load. <a href="/#leads">See the lead feed</a>.</p>'});
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6996884592ac45e8816a84907f9ebea2"}'></script><!-- End Cloudflare Web Analytics -->
 </body></html>

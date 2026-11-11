@@ -62,4 +62,5 @@ $('rf').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)re
 baseIn.addEventListener('change',changed);baseIn.addEventListener('input',()=>{if(!baseIn.value.trim()||basePt())changed()});radIn.addEventListener('change',changed);srtIn.addEventListener('change',changed);
 $('sv').addEventListener('click',e=>{SAVED_ONLY=!SAVED_ONLY;e.currentTarget.classList.toggle('on',SAVED_ONLY);e.currentTarget.setAttribute('aria-pressed',SAVED_ONLY);draw(ALL)});
 $('feed').addEventListener('click',e=>{const b=e.target.closest('.star');if(!b)return;const id=b.dataset.id;saved.has(id)?saved.delete(id):saved.add(id);LS.set('b411.saved',[...saved]);draw(ALL)});
-</script></body></html>
+</script><!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6996884592ac45e8816a84907f9ebea2"}'></script><!-- End Cloudflare Web Analytics -->
+</body></html>
