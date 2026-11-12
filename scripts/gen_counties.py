@@ -59,6 +59,7 @@ for k,n,seat,area,rx,towns in CT:
 {foot}
 <script type="application/ld+json">{ld}</script>
 <script>window.CTY={json.dumps(cty)};</script><script src="/common.js"></script><script src="/county.js"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "6996884592ac45e8816a84907f9ebea2"}}'></script><!-- End Cloudflare Web Analytics -->
 </body></html>
 '''
     open(R+f'county/{k}.html','w').write(meta(title,desc,url)+body)
@@ -69,6 +70,7 @@ hub=meta('Florida county HDD bid pages near Arcadia — Bore411','County pages f
 <div class="grid two" style="margin-top:14px">{cards}</div>
 <p class="mut" style="margin-top:14px">Working outside these ten counties? Every lead still gets a <a href="/#leads">bid package</a> with soil and sinkhole screening anywhere in Florida.</p></section></div>
 {foot}
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "6996884592ac45e8816a84907f9ebea2"}}'></script><!-- End Cloudflare Web Analytics -->
 </body></html>
 '''
 open(R+'counties.html','w').write(hub)
