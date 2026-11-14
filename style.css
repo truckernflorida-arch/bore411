@@ -12,7 +12,7 @@ section{padding:44px 0;border-top:1px solid var(--line)}h2{margin:0 0 18px;font-
 .grid{display:grid;gap:14px;grid-template-columns:1fr}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
 .card h3{margin:0 0 6px;font-size:1.05rem}.mut{color:var(--mut);font-size:.9rem}
-.tag{display:inline-block;font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:4px;background:var(--dirt);color:var(--or);margin-right:6px;text-transform:uppercase}
+.tag{display:inline-block;font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:4px;background:var(--dirt);color:#ff7d30;margin-right:6px;text-transform:uppercase}
 .due{font-weight:700}.soon{color:#ffd23f}
 form{display:grid;gap:10px}input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid var(--line);background:#141311;color:var(--txt);font-size:1rem}
 .todo{font-size:.8rem;color:#ffd23f}footer{padding:28px 0;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
@@ -59,3 +59,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .filt.near input,.filt.near select{width:auto;min-width:0;margin:0;padding:6px 10px;font-size:.9rem;background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:8px}.filt.near input{min-width:190px}
 #feed .card{position:relative;padding-right:44px}.star{position:absolute;top:10px;right:10px;background:none;border:0;color:var(--mut,#999);font-size:1.4rem;line-height:1;cursor:pointer;padding:4px}.star.on{color:#ffd100}.dist{color:var(--txt)}
 @media(max-width:600px){.filt.near input{min-width:0;flex:1 1 100%}}
+
+/* --- 2026-11-14: mobile + a11y pass --- */
+.grid>*{min-width:0}.card{overflow-wrap:break-word}
+.tbl table caption{caption-side:top;text-align:left;font-weight:700;padding:10px 8px;color:var(--mut);border-bottom:1px solid var(--line)}
+#pkg{min-height:100vh}

@@ -19,14 +19,14 @@ const v=x=>x==null||x===''?'—':esc(x);
 function run(){const p=C.pts[+sp.value];if(!p)return;const [lab,lat,lon]=p;
 so.innerHTML='<p class="mut">Asking USDA Soil Data Access…</p>';ko.innerHTML='<p class="mut">Asking Florida Geological Survey…</p>';
 B.soilAt(lat,lon).then(M=>{if(!M.length){so.innerHTML='<p class="mut">No mapped soil unit at that point.</p>';return}
-so.innerHTML=M.map(m=>{const wt=B.cmFt(m.wtdepannmin),rk=B.cmFt(m.brockdepmin);return `<div class="tbl"><table><tr><th colspan="2">${esc(m.muname)}<div class="mut" style="font-weight:400">${esc(m.areaname||'')} · map unit ${esc(m.mukey)} · ${esc(lab)} (${lat.toFixed(4)}, ${lon.toFixed(4)})</div></th></tr>
+so.innerHTML=M.map(m=>{const wt=B.cmFt(m.wtdepannmin),rk=B.cmFt(m.brockdepmin);return `<div class="tbl"><table><caption>${esc(m.muname)}<div class="mut" style="font-weight:400">${esc(m.areaname||'')} · map unit ${esc(m.mukey)} · ${esc(lab)} (${lat.toFixed(4)}, ${lon.toFixed(4)})</div></caption>
 <tr><td>Major soils</td><td>${m.comps.length?m.comps.map(c=>`${esc(c.compname)} ${v(c.comppct_r)}%`).join('<br>'):'—'}</td></tr>
 <tr><td>Drainage class</td><td>${v(m.drclassdcd)}</td></tr><tr><td>Hydrologic soil group</td><td>${v(m.hydgrpdcd)}</td></tr>
 <tr><td>Shallowest annual water table</td><td>${wt?wt+' ft ('+esc(m.wtdepannmin)+' cm)':'None reported within 200 cm'}</td></tr>
 <tr><td>Depth to bedrock</td><td>${rk?rk+' ft ('+esc(m.brockdepmin)+' cm)':'None reported within 200 cm'}</td></tr>
 <tr><td>Flooding frequency</td><td>${v(m.flodfreqdcd)}</td></tr></table></div>`}).join('')+`<p class="mut" style="font-size:.8rem">Source: USDA NRCS Soil Data Access (SSURGO), live query ${esc(new Date().toLocaleDateString('en-US'))}. One point only; soils change across a bore path.</p>`})
 .catch(e=>{so.innerHTML='<p class="mut">Soil lookup failed ('+esc(e.message)+'). Try again later or use <a href="https://websoilsurvey.nrcs.usda.gov/" target="_blank" rel="noopener">Web Soil Survey</a>.</p>'});
-B.sinkAt(lat,lon,10).then(r=>{const w=r.within;ko.innerHTML=`<div class="tbl"><table><tr><th colspan="2">Reported subsidence incidents near ${esc(lab)}</th></tr>
+B.sinkAt(lat,lon,10).then(r=>{const w=r.within;ko.innerHTML=`<div class="tbl"><table><caption>Reported subsidence incidents near ${esc(lab)}</caption>
 <tr><td>Within 1 mile</td><td><b>${w[1]}</b></td></tr><tr><td>Within 3 miles</td><td><b>${w[3]}</b></td></tr><tr><td>Within 5 miles</td><td><b>${w[5]}</b></td></tr><tr><td>Within 10 miles</td><td><b>${w[10]}</b>${r.capped?' (1,000+; list capped)':''}</td></tr>
 <tr><td>Field-verified sinkholes (10 mi)</td><td>${r.verified}</td></tr></table></div><p class="mut" style="font-size:.8rem">Source: Florida Geological Survey Subsidence Incident Reports (FDEP open data), live query ${esc(new Date().toLocaleDateString('en-US'))}${r.revised?'; newest reported event '+esc(B.fgsDate(r.revised)):''}. Most reports are not field-checked, and no reports is not a clearance.</p>`})
 .catch(e=>{ko.innerHTML='<p class="mut">Sinkhole lookup failed ('+esc(e.message)+'). See <a href="https://floridadep.gov/fgs/sinkholes" target="_blank" rel="noopener">FGS sinkholes</a>.</p>'})}
