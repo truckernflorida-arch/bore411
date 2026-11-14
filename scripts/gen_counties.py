@@ -21,7 +21,7 @@ def meta(title,desc,url):
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="description" content="{desc}">
 <link rel="canonical" href="{url}"><meta property="og:type" content="website"><meta property="og:site_name" content="Bore411"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="{url}"><meta property="og:image" content="https://bore411.com/images/hero-hdd-rig-v3.jpg"><meta property="og:image:width" content="1280"><meta property="og:image:height" content="720"><meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/style.css"><style>.jump{{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}}.jump a{{font-size:.85rem;padding:4px 10px;border:1px solid var(--line);border-radius:6px;text-decoration:none}}.jump a.on{{border-color:var(--or)}}.card ul{{margin:6px 0 8px;padding-left:20px}}.card li{{margin:3px 0}}.src{{font-size:.8rem;color:var(--mut)}}</style></head><body>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css"><style>.jump{{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}}.jump a{{font-size:.85rem;padding:4px 10px;border:1px solid var(--line);border-radius:6px;text-decoration:none}}.jump a.on{{border-color:var(--or)}}.card ul{{margin:6px 0 8px;padding-left:20px}}.card li{{margin:3px 0}}.src{{font-size:.8rem;color:var(--mut)}}</style></head><body>
 '''
 def jump(cur=None):
     return '<nav class="jump" aria-label="Other counties">'+''.join(f'<a{" class=\"on\" aria-current=\"page\"" if k==cur else ""} href="/county/{k}.html">{n}</a>' for k,n,*_ in CT)+'</nav>'
