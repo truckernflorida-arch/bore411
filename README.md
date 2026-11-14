@@ -22,6 +22,9 @@ Free load board and Florida HDD bid desk for underground work (HDD, boring, tren
 - Rig-class tags (est.) on leads come from `rigClass()` in `common.js`, parsed from the scope text; no extra leads.json field.
 - `leads.json` — rewritten daily: `type, title, agency, location, bid, due` (or `open_until`), `scope, source, url`.
 
+- `favicon.svg` — site icon, linked with `<link rel="icon">` in every page head (county pages via `scripts/gen_counties.py`). New pages should copy the same head lines.
+- Layout note: `style.css` sets `.grid>*{min-width:0}` so wide tables scroll inside `.tbl` instead of widening the page on phones; wrap tables in `<div class="tbl">` and use `<caption>` for a table title.
+
 Changes are logged in `CHANGELOG.md`.
 
 Images in `/images` are illustrative AI-generated pictures, not real Bore411 jobs or crews. The home hero (`hero-hdd-rig-v3.jpg`) is modeled on a real tracked HDD rig: inclined rack, rod entering the ground at an angle at the front, nothing out the back.

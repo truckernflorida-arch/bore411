@@ -1,5 +1,13 @@
 # Bore411 changelog
 
+## 2026-11-14
+- Mobile and accessibility fix pass (from a Lighthouse and headless-Chrome check of the live site at 320 and 390 px wide):
+  - Fix: bid package pages were wider than a phone screen (404 px of content on a 390 px screen, so the whole page scrolled sideways) because the wide weather and soil tables stretched the card grid. Grid cards can now shrink and the tables scroll inside their card, so bid and county pages fit at 320 px. Layout shift on bid pages (footer jumping down when the package loaded; Lighthouse CLS 0.27) is gone (CLS 0).
+  - Fix: on the 811 calculator (`tools.html`) the "Marks, tolerance zone & cover" section sat outside the page wrapper (no side margins); it is back inside.
+  - New site icon (`favicon.svg`, bore path + "411"), linked from every page and from `scripts/gen_counties.py`. It also ends the `/favicon.ico` 404 that showed as a console error on every page.
+  - Accessibility: the orange lead tags (Public bid / Sub work) are slightly lighter so they meet WCAG AA contrast (4.99:1, was 4.43:1); the 811 calculator date fields and the equipment form drop-downs have accessible names; the USDA soil and FGS sinkhole tables on bid and county pages use a real table caption. Lighthouse accessibility on bid, county, 811 calculator and equipment pages went from 91–94 to 98 (local test).
+  - No content, figures, forms, analytics or `leads.json` changed. Not fixed yet: heading order (cards use h3 right after the page h1) on several pages.
+
 ## 2026-11-13
 - Bid pages: new "Weather & rain-out check (NWS)" card. At the point picked in the soil card (town/county center or typed job-site coordinates) it queries the National Weather Service API (api.weather.gov, free, no key) live in the browser and shows any active NWS alerts for that point, the 7-day forecast by period (forecast, temperature, chance of rain, wind), and a one-line summary of daytime periods with a 50%+ chance of rain and any periods with thunderstorms. Shows the NWS forecast office and issue time (ET). The 50% "likely rain-out" cutoff is a Bore411 shortcut, labeled as such; for planning mobilization, not a go/no-go. No new page, so `sitemap.xml` is unchanged.
 
