@@ -1,5 +1,14 @@
 # Bore411 changelog
 
+## 2026-11-15
+- New `fdot-bore.html` "FDOT directional bore spec desk (Section 555)", for crews bidding or subbing FDOT conduit work. From the FDOT Standard Specifications FY 2026-27 (effective July 1, 2026; Section 555 pp. 795–799, Section 630 pp. 852–858; Section 555 checked word for word against the FY 2027-28 edition, no changes; read Nov 15, 2026):
+  - Deadline calculator: notify the Engineer 48 hours before starting (555-3.1), day 14 of product exposure (555-2.2), Bore Path Report within seven days of each bore path (555-5.1; counted as calendar days, labeled to confirm with the Engineer), slurry/spoils cleanup within 48 hours of install (555-2.2), as-built plans within 30 calendar days (555-5.2). Downloads the deadlines as a calendar file (.ics).
+  - 26-item phase-by-phase checklist (bid and price, before start, drilling and pullback, after the pull) with the section number on every item; ticks saved in the browser; printable.
+  - Pay length check: FDOT pays underground conduit per straight-line horizontal foot between pull box centers regardless of conduit count, no allowance for sweeps or depth (630-4), runs under pavement paid as directional bore (630-5); shows paid LF vs. conduit to install and the price factor per paid foot. Estimate.
+  - Joint test check against 555-3.1.2 (water tight: no leakage at 5 psi; soil tight: 0.1 gal at 2 psi; 1 hour).
+  - Bore Path Report builder with the five items 555-5.1 requires and an elevation/offset point table (555-3.2(8), minimum three points); imports rods from the bore calculator's rod-by-rod log (card 6) as estimated head elevations, labeled to correct to surveyed top of product. Copy, .txt and points CSV. Stays in the browser.
+  - Linked from bid pages that mention FDOT or a state road, the bore log card on `calc.html`, the Spec 555 note on `benchmarks.html`, and the quick links on `marks.html`. Added to `sitemap.xml`. Not in the top nav (nav is unchanged on all pages). Informational only; contract, plans and the Engineer govern.
+
 ## 2026-11-14
 - Mobile and accessibility fix pass (from a Lighthouse and headless-Chrome check of the live site at 320 and 390 px wide):
   - Fix: bid package pages were wider than a phone screen (404 px of content on a 390 px screen, so the whole page scrolled sideways) because the wide weather and soil tables stretched the card grid. Grid cards can now shrink and the tables scroll inside their card, so bid and county pages fit at 320 px. Layout shift on bid pages (footer jumping down when the package loaded; Lighthouse CLS 0.27) is gone (CLS 0).
