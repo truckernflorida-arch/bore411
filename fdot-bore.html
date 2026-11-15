@@ -1,0 +1,200 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FDOT directional bore spec desk (Section 555) — Bore411</title><meta name="description" content="Free FDOT Section 555 directional bore desk for Florida HDD crews: phase-by-phase spec checklist, deadline calculator, joint test check, conduit pay-length check (Section 630) and a Bore Path Report draft builder, with section citations.">
+<link rel="canonical" href="https://bore411.com/fdot-bore.html"><meta property="og:type" content="website"><meta property="og:site_name" content="Bore411"><meta property="og:title" content="FDOT directional bore spec desk (Section 555) — Bore411"><meta property="og:description" content="Section 555 checklist, deadlines, joint test, Section 630 pay length and a Bore Path Report builder for FDOT HDD jobs — cited."><meta property="og:url" content="https://bore411.com/fdot-bore.html"><meta property="og:image" content="https://bore411.com/images/hero-hdd-rig-v3.jpg"><meta property="og:image:width" content="1280"><meta property="og:image:height" content="720"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+<style>.ck{list-style:none;padding:0;margin:0}.ck li{padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}.ck input{width:auto;margin:4px 0 0;flex:none;transform:scale(1.3)}.ck label{margin:0;color:var(--txt);font-size:.95rem}.ck .ref{color:var(--mut);font-size:.8rem}
+.ptbl input{padding:6px 8px;font-size:.9rem;min-width:70px}.ptbl td{padding:4px}.dl p{margin:6px 0}
+@media print{header.top,.apwa,footer,.noprint,nav{display:none!important}body{background:#fff;color:#000}.card{border:1px solid #999;background:#fff}a{color:#000}.mut{color:#333}}</style></head><body>
+<div class="apwa" aria-hidden="true"><i style="background:#e4002b"></i><i style="background:#ffd100"></i><i style="background:#ff6a13"></i><i style="background:#0072ce"></i><i style="background:#a05eb5"></i><i style="background:#43b02a"></i><i style="background:#fff"></i><i style="background:#ff69b4"></i></div>
+<div class="wrap"><header class="top"><a class="logo" href="/" style="text-decoration:none;color:var(--txt)">BORE<b>411</b></a><nav class="links"><a href="/#leads">Leads</a><a href="/tools.html">811 calculator</a><a href="/marks.html">Marks &amp; cover</a><a href="/calc.html">Bore calculators</a><a href="/permits.html">ROW permits</a><a href="/licenses.html">Licensing</a><a href="/benchmarks.html">Price benchmarks</a><a href="/rigs.html">Rig sizes</a><a href="/crews.html">Crews</a><a href="/equipment.html">Equipment</a><a href="/#alerts">Get alerts</a></nav></header></div>
+<main class="wrap mark"><section style="border-top:0">
+<h1 style="margin:6px 0 10px">FDOT directional bore spec desk (Section 555)</h1>
+<p class="mut">What FDOT's directional bore spec asks of the drilling crew, start to finish, with the deadlines worked out and a Bore Path Report draft you can fill in from your rod log. Built for HDD crews bidding or subbing FDOT conduit work around Arcadia. <b>Informational only — not legal advice, not a substitute for the contract.</b></p>
+<div class="warn"><b>Which rules apply?</b> Section 555 is part of the FDOT <i>Standard Specifications for Road and Bridge Construction</i>, FY 2026-27 edition (effective July 1, 2026; Section 555 on pages 795–799). It governs FDOT construction contracts, and Section 630 says conduit installed by directional bore follows it (630-3.1). County, city and utility jobs only follow it if their contract or permit says so. Your contract, plans, special provisions and the Engineer govern. We compared Section 555 in the FY 2027-28 edition (effective July 1, 2027): the text is unchanged.</div>
+<p class="noprint"><a class="btn p" href="#bpr">Bore Path Report builder</a> <a class="btn s" href="#dates">Deadline calculator</a> <a class="btn s" href="#check">Spec checklist</a></p>
+</section>
+
+<section id="dates"><h2>1. Deadline calculator</h2>
+<p class="mut">Enter what you know; each deadline shows as soon as its date is filled in. Times are this device's local time (Florida jobs: ET).</p>
+<div class="grid two">
+<div class="card"><label for="dStart">Planned start of bore work (date and time)</label><input type="datetime-local" id="dStart">
+<label for="dExp" style="margin-top:10px">Product first exposed (day 1)</label><input type="date" id="dExp">
+<label for="dBore" style="margin-top:10px">Bore path completed</label><input type="date" id="dBore">
+<label for="dInst" style="margin-top:10px">Product installation completed (date and time)</label><input type="datetime-local" id="dInst">
+<label for="dWork" style="margin-top:10px">All directional bore work completed</label><input type="date" id="dWork"></div>
+<div class="card dl"><h3>Deadlines</h3><div id="dOut" aria-live="polite"></div>
+<p class="noprint"><button type="button" class="btn s" id="dIcs">Add deadlines to calendar (.ics)</button></p>
+<p class="mut" style="font-size:.8rem">"Within seven days" (555-5.1) is counted here as calendar days; FDOT 1-3 defines a calendar day as every day on the calendar, but 555-5.1 does not say which kind of day, so confirm with the Engineer. If product damage is suspected: stop, notify the Engineer, pressure test within 24 hours if required; the Engineer has up to 72 hours to rule (555-3.1.1).</p></div>
+</div></section>
+
+<section id="check"><h2>2. Section 555 checklist by phase</h2>
+<p class="mut">Tick items as you go; ticks stay in this browser only. Section numbers are FDOT FY 2026-27 Standard Specifications. <span id="ckCount"></span></p>
+<p class="noprint"><button type="button" class="btn s" id="ckReset">Clear ticks</button> <button type="button" class="btn s" onclick="print()">Print</button></p>
+<div class="grid two" id="ckWrap"></div></section>
+
+<section id="pay"><h2>3. Pay length check (Section 630)</h2>
+<div class="grid two">
+<div class="card"><p class="mut">FDOT pays underground conduit per foot of <b>horizontal straight-line length between centers</b> of pull boxes, cabinets, poles, etc., regardless of the length or number of conduits, with no allowance for sweeps or depth (630-4). The unit price includes the boring, casings, spoils, drilling fluid disposal, locate wire, flowable fill and restoration (630-4). Under existing pavement (roadway, driveways or sidewalk) it is paid as directional bore unless identified as open trench; if one pull-box-to-pull-box run is under both turf and pavement, the whole run is paid as directional bore (630-5).</p>
+<label for="pL">Straight-line distance, pull box center to center (ft)</label><input id="pL" inputmode="decimal" placeholder="e.g. 350">
+<label for="pB" style="margin-top:10px">Drilled bore length, entry to exit (ft)</label><input id="pB" inputmode="decimal" placeholder="e.g. 380">
+<label for="pN" style="margin-top:10px">Conduits in the bore</label><input id="pN" inputmode="numeric" value="1">
+<label for="pX" style="margin-top:10px">Extra conduit per conduit for sweeps, risers and tails (ft)</label><input id="pX" inputmode="decimal" value="0">
+<label for="pP" style="margin-top:10px">Under existing pavement anywhere between the two pull boxes?</label><select id="pP"><option value="y">Yes (roadway, driveway or sidewalk)</option><option value="n">No, turf only</option></select></div>
+<div class="card"><h3>Result</h3><div id="pOut" aria-live="polite"></div><p class="mut" style="font-size:.8rem">Estimate; the plans and the Engineer's measurement govern. Compare your price per paid foot with FDOT averages on the <a href="/benchmarks.html#bidsheet">bid sheet</a>. Conduit material rules (for example HDPE SDR 11 or lower for ITS and signal conduit in earth, SDR 13.5 or lower for lighting) are in 630-3.1; a run may not have more than 270° of bends between terminations without a pull box (630-3.1).</p></div>
+</div></section>
+
+<section id="joint"><h2>4. Joint test check (555-3.1.2)</h2>
+<div class="grid two"><div class="card">
+<p class="mut">Where the product is under any pavement (including sidewalk) and front shoulders, FDOT requires a <b>water tight</b> pipe and joint configuration: no leakage at a sustained 5 psi. Elsewhere it must meet <b>soil tight</b> requirements: up to 0.1 gallon of leakage at a sustained 2 psi. Joint integrity tests run for one hour. The Engineer decides where water tight applies, including for future widening.</p>
+<label for="jW">Where is the product?</label><select id="jW"><option value="w">Under pavement, sidewalk or front shoulder (water tight)</option><option value="s">Elsewhere (soil tight)</option></select>
+<label for="jP" style="margin-top:10px">Sustained test pressure (psi)</label><input id="jP" inputmode="decimal">
+<label for="jT" style="margin-top:10px">Test duration (minutes)</label><input id="jT" inputmode="numeric" value="60">
+<label for="jG" style="margin-top:10px">Leakage measured (gallons)</label><input id="jG" inputmode="decimal"></div>
+<div class="card"><h3>Against the spec numbers</h3><div id="jOut" aria-live="polite"></div><p class="mut" style="font-size:.8rem">Compares your numbers with 555-3.1.2 only. Also follow the product maker's pressure test recommendations and any owner pressure requirement for carrier pipe. The Engineer reviews and approves results.</p></div>
+</div></section>
+
+<section id="bpr"><h2>5. Bore Path Report builder (555-5.1)</h2>
+<p class="mut">FDOT wants a Bore Path Report within seven days of finishing each bore path, and no payment for the pay item until it is accepted (555-6). This builds a plain-text draft with the five required items. It stays in this browser; nothing is sent to Bore411.</p>
+<div class="grid two">
+<div class="card"><h3>Report details</h3>
+<label for="b1">1. Project location</label><input id="b1" placeholder="e.g. SR 70 at CR 760, DeSoto County">
+<label for="b1f" style="margin-top:8px">Financial project number</label><input id="b1f">
+<label for="b1p" style="margin-top:8px">Permit number (when assigned)</label><input id="b1p">
+<label for="b2" style="margin-top:8px">2. Person collecting data: name, title, position, company</label><input id="b2">
+<label for="b3" style="margin-top:8px">3. Site location (plans station or permanent structure in the right of way)</label><input id="b3">
+<label for="b4" style="margin-top:8px">4. Detection method</label><select id="b4"><option>Walkover</option><option>Wire line</option><option>Wire line with surface grid verification</option><option>Other system approved by the Engineer</option></select>
+<label for="b5f" style="margin-top:8px">Permanent fixed feature used for elevations and offsets (Engineer-approved)</label><input id="b5f" placeholder="e.g. mast arm foundation, inlet cover, headwall">
+<label for="b6" style="margin-top:8px">Bore notes (optional): bore diameter, product, drilling fluid, annular fill</label><textarea id="b6" rows="3"></textarea></div>
+<div class="card"><h3>5. Elevation and offset points</h3>
+<p class="mut" style="font-size:.85rem">Per 555-3.2(8): elevations on top of the product and offsets from the product centerline to the fixed feature, at every vertical and horizontal alignment correction, enough to plot the alignment, at least three points. The spec also says "with a minimum distance between points of 100 feet"; the table shows your largest spacing so you can check how the Engineer applies that.</p>
+<div class="tbl"><table class="ptbl"><thead><tr><th>Point / station</th><th>Distance along bore (ft)</th><th>Offset (ft)</th><th>Top elev. (ft)</th><th>Note</th><th><span class="mut">Del</span></th></tr></thead><tbody id="pts"></tbody></table></div>
+<p class="noprint"><button type="button" class="btn s" id="addPt">Add point</button></p>
+<details class="noprint"><summary class="mut" style="cursor:pointer">Import from the rod-by-rod bore log</summary>
+<p class="mut" style="font-size:.85rem">Uses the log saved on this device by <a href="/calc.html#log">bore calculator card 6</a>. Calculated depths are of the drill head below entry grade (estimates), not surveyed top-of-product elevations; enter entry grade elevation to get approximate head elevations, then correct them to top of product from your survey.</p>
+<label for="iE">Entry grade elevation (ft, your datum)</label><input id="iE" inputmode="decimal">
+<label for="iEv" style="margin-top:8px">Import every Nth rod (last rod always included)</label><input id="iEv" inputmode="numeric" value="1">
+<p><button type="button" class="btn s" id="imp">Import rods as points</button></p><div id="impOut" aria-live="polite"></div></details>
+<div id="bChk" aria-live="polite"></div></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>Draft report</h3><pre id="bOut" style="white-space:pre-wrap;font:14px/1.45 ui-monospace,Menlo,Consolas,monospace;margin:0"></pre>
+<p class="noprint" style="margin-top:12px"><button type="button" class="btn p" id="bCopy">Copy report</button><button type="button" class="btn s" id="bTxt">Download .txt</button><button type="button" class="btn s" id="bCsv">Points CSV</button><button type="button" class="btn s" id="bClr">Clear report</button></p>
+<p class="mut" style="font-size:.8rem">A draft for your own records and submittal. Check it against the contract, plans and any FDOT or owner form before you submit. As-built plans are a separate submittal: PDF, same scale as the plans, centerline to 1 inch at the ends and observed points, failed bore paths shown as "Failed Bore Path - Taken Out of Service", within 30 calendar days (555-5.2).</p></div>
+</section>
+
+<section><h2>Sources</h2><ul class="mut">
+<li>Florida Department of Transportation, <a href="https://www.fdot.gov/specifications/standard-specification-library" target="_blank" rel="noopener">Standard Specifications for Road and Bridge Construction, FY 2026-27</a> (effective July 1, 2026): Section 555 Directional Bore (pp. 795–799), Section 630 Conduit, 630-3.1, 630-4 and 630-5 (pp. 852–858), Section 1-3 definitions (calendar day). FY 2027-28 edition (effective July 1, 2027) Section 555 compared word for word: no changes. Both read Nov 15, 2026.</li>
+<li>Max pilot or back-reamer bit diameter (Table 555-1: OD under 8″ → OD + 4″; 8″–24″ → 1.5 × OD; over 24″ → OD + 12″) matches the FDOT Utility Accommodation Manual rule already on <a href="/marks.html#hdd">Marks &amp; cover</a>, which has the calculator.</li>
+<li>Bore411 does not bid work, take a percentage of any job, or hold or share contractor licenses. Not affiliated with FDOT.</li></ul>
+<div class="grid two" style="margin-top:14px">
+<div class="card"><h3>Same job, other tools</h3><p class="mut"><a href="/calc.html">Bore calculators</a> (reamer, mud, pullback, bore log) · <a href="/marks.html">FDOT cover &amp; max bore</a> · <a href="/permits.html">FDOT One Stop Permitting (ROW permits)</a> · <a href="/tools.html">811 dig dates</a></p></div>
+<div class="card"><h3>Find FDOT work</h3><p class="mut">Open leads with soil, sinkhole and weather screening: <a href="/#leads">today's leads</a>. Price it: <a href="/benchmarks.html">FDOT benchmarks</a>.</p></div></div>
+</section></main>
+<footer><div class="wrap">Informational only. Spec text summarized from FDOT's published Standard Specifications; read the full sections and your contract. Bore411 is a free information board: it does not bid work, take a percentage of any job, or hold or share contractor licenses.<br>© 2026 Bore411</div></footer>
+<script>
+const $=id=>document.getElementById(id),esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ls=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
+const n=(x,d=1)=>(+x).toLocaleString('en-US',{maximumFractionDigits:d});
+// 1. Deadlines
+const DD=['dStart','dExp','dBore','dInst','dWork'];let DS=ls('b411.fdot555d')||{};DD.forEach(k=>{if(DS[k])$(k).value=DS[k]});
+const pd=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)},addD=(d,k)=>{const x=new Date(d);x.setDate(x.getDate()+k);return x};
+const fD=d=>d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}),fDT=d=>fD(d)+', '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+let EV=[];
+function dates(){EV=[];let h='';
+if($('dStart').value){const s=new Date($('dStart').value),t=new Date(s.getTime()-48*36e5);h+=`<p>Notify the Engineer by <b>${fDT(t)}</b> (48 hours before starting; do not start until the Engineer is on site and agrees, 555-3.1).</p>`;EV.push([t,'Notify FDOT Engineer: bore work starts in 48 hours (555-3.1)'])}
+if($('dExp').value){const e=addD(pd($('dExp').value),13);h+=`<p>Exposed product: day 14 is <b>${fD(e)}</b>. Limit exposure to 3 feet and 14 consecutive days unless the Engineer approves more (555-2.2(4)).</p>`;EV.push([e,'Day 14 of product exposure: limit 14 consecutive days (555-2.2)'])}
+if($('dBore').value){const b=addD(pd($('dBore').value),7);h+=`<p>Bore Path Report due by <b>${fD(b)}</b> (within seven days of completing the bore path, 555-5.1). No payment for the pay item until it is accepted (555-6).</p>`;EV.push([b,'Bore Path Report due to FDOT Engineer (555-5.1)'])}
+if($('dInst').value){const i=new Date(new Date($('dInst').value).getTime()+48*36e5);h+=`<p>Site cleaned of excess slurry and spoils and restored by <b>${fDT(i)}</b> (within 48 hours of completing installation, 555-2.2(2)).</p>`;EV.push([i,'Slurry and spoils cleanup deadline: 48 hours after install (555-2.2)'])}
+if($('dWork').value){const w=addD(pd($('dWork').value),30);h+=`<p>As-built plans (all bores, successful and failed) due by <b>${fD(w)}</b> (within 30 calendar days of completing the work, 555-5.2).</p>`;EV.push([w,'As-built plans due to FDOT Engineer (555-5.2)'])}
+$('dOut').innerHTML=h||'<p class="mut">Fill in a date to see its deadline.</p>';$('dIcs').disabled=!EV.length}
+DD.forEach(k=>$(k).addEventListener('input',()=>{DS[k]=$(k).value;ls('b411.fdot555d',DS);dates()}));dates();
+$('dIcs').onclick=()=>{if(!EV.length)return;const z=x=>x.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''),dd=x=>x.getFullYear()+String(x.getMonth()+1).padStart(2,'0')+String(x.getDate()).padStart(2,'0'),now=z(new Date());
+const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Bore411//FDOT 555//EN'];EV.forEach((e,i)=>{const timed=/48 hours/.test(e[1]);L.push('BEGIN:VEVENT','UID:fdot555-'+i+'-'+now+'@bore411.com','DTSTAMP:'+now,timed?'DTSTART:'+z(e[0]):'DTSTART;VALUE=DATE:'+dd(e[0]),timed?'DTEND:'+z(new Date(e[0].getTime()+18e5)):'DTEND;VALUE=DATE:'+dd(addD(e[0],1)),'SUMMARY:'+e[1].replace(/[,;]/g,m=>'\\'+m),'DESCRIPTION:From bore411.com/fdot-bore.html. Confirm with the contract and Engineer.','BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:'+e[1].replace(/[,;]/g,m=>'\\'+m),'END:VALARM','END:VEVENT')});L.push('END:VCALENDAR');
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar'}));a.download='fdot-555-deadlines.ics';document.body.appendChild(a);a.click();a.remove()};
+// 2. Checklist
+const CK=[['Bid and price',[
+['No separate pay item for directional bore: include it in the price of the item installed (e.g. conduit 0630 2 12).','555-6'],
+['No pay for failed bore paths, flowable fill injection, products taken out of service or incomplete installs. Price that risk.','555-6, 630-5'],
+['Find the tracking method in the plans (walkover, wire line, wire line with surface grid, or other approved); radio interference over 5 ft may mean a special system.','555-3.2'],
+['Check reamer size against Table 555-1 (max bit diameter by product OD; maker\'s recommendation for restrained-joint pipe). <a href="/marks.html#hdd">Calculator</a>','555-3.3'],
+['Drilling fluid: bentonite or other approved agent in potable water, pH 6.0 minimum. Other chemicals or polymer surfactants need written Engineer consent and written certification they are environmentally safe.','555-3.4'],
+['Plan disposal of drilling fluid and spoils; test fluid if the ground may be contaminated.','555-4.1']]],
+['Before you start',[
+['Notify the Engineer 48 hours ahead; do not start until the Engineer is on site and agrees preparations are proper.','555-3.1'],
+['Name a representative who knows the equipment, boring and FDOT procedures, on site for the whole installation.','555-3.1'],
+['Identify the water source for mixing; non-potable water may need a pH test.','555-3.4'],
+['MOT per Standard Plans and MUTCD; safe alternate pedestrian route per Standard Plans Indexes 102-600 and 102-660.','555-2.1, 555-2.2(3)'],
+['Entry, exit, recovery and sump pits per Section 120; sump pits required unless vacuum runs the whole time (or the Engineer approves). Size pits for expected returns.','555-2.2(1), 555-4.1'],
+['Calibrate the locating and tracking equipment. It must give clock and pitch, depth, transmitter temperature, battery status, x,y position, and azimuth where walkover is not possible.','555-3.2']]],
+['While drilling and pulling back',[
+['Monitor pump rate, pressures, viscosity and density during pilot, ream and pullback.','555-4.1'],
+['Relief holes only at locations and conditions the Engineer approves.','555-4.1'],
+['Contain fluids at entry and exit until recycled, removed or vacuumed; confine any frac-out at the surface.','555-1.2, 555-4.1'],
+['Record top-of-product elevations and offsets to an Engineer-approved permanent feature at every vertical and horizontal correction; at least three points.','555-3.2(8)'],
+['Backream by connecting the reamer to trailing drill stems at the exit pit (when the Engineer calls for it); leave drill pipe in the hole until the product is in; never push from entry to exit after the pilot.','555-4.1'],
+['Pull the product in the same day the pre-bore is completed.','555-4.1'],
+['Contamination suspected: stop and call the Engineer. Damage to an FDOT facility: stop all work until a restoration plan is approved.','555-4.1, 555-4.2'],
+['Obstruction or failed bore: fill product left in place with excavatable flowable fill; submit a new procedure and revised plans before drilling elsewhere.','555-3.1.3, 555-4.2']]],
+['After the pull and paperwork',[
+['Clean excess slurry and spoils and restore the site within 48 hours of install.','555-2.2(2)'],
+['Exposed product: no more than 3 ft and 14 consecutive days unless approved.','555-2.2(4)'],
+['Joint integrity test (1 hour) when required: water tight under pavement, sidewalk and front shoulders, soil tight elsewhere. <a href="#joint">Check</a>','555-3.1.2'],
+['Bore Path Report within 7 days of each bore path. <a href="#bpr">Builder</a>','555-5.1'],
+['As-built plans (PDF, same scale as plans) within 30 calendar days, showing all bores including failed ones, bore notes (bore and product diameter, fluid, annular fill, casing).','555-5.2'],
+['Repair heaving, settlement, pavement separation or frac-out damage at no cost to FDOT; remediation plans when the Engineer asks.','555-2.3, 555-2.3.1']]]];
+let CS=ls('b411.fdot555c')||{};
+$('ckWrap').innerHTML=CK.map((g,gi)=>`<div class="card"><h3>${esc(g[0])}</h3><ul class="ck">${g[1].map((it,i)=>{const id='c'+gi+'_'+i;return `<li><input type="checkbox" id="${id}"${CS[id]?' checked':''}><label for="${id}">${it[0]} <span class="ref">${esc(it[1])}</span></label></li>`}).join('')}</ul></div>`).join('');
+const ckc=()=>{const all=document.querySelectorAll('#ckWrap input'),on=[...all].filter(x=>x.checked).length;$('ckCount').textContent=on+' of '+all.length+' ticked.'};
+$('ckWrap').addEventListener('change',e=>{if(e.target.type==='checkbox'){CS[e.target.id]=e.target.checked;ls('b411.fdot555c',CS);ckc()}});
+$('ckReset').onclick=()=>{CS={};ls('b411.fdot555c',CS);document.querySelectorAll('#ckWrap input').forEach(x=>x.checked=false);ckc()};ckc();
+// 3. Pay length
+function pay(){const L=+$('pL').value,B=+$('pB').value||0,N=Math.max(1,Math.round(+$('pN').value||1)),X=+$('pX').value||0,pv=$('pP').value==='y';
+if(!(L>0)){$('pOut').innerHTML='<p class="mut">Enter the pull box to pull box distance.</p>';return}
+const buy=N*((B>0?B:L)+X);let h=`<p>Paid quantity: <b class="big">${n(L,0)} LF</b> as <b>${pv?'directional bore':'open trench'}</b>${pv?'':' (unless the plans call it directional bore)'}.</p><p>Conduit to install: about <b>${n(buy,0)} ft</b> (${N} × ${n(B>0?B:L,0)} ft${X?' + '+n(X,0)+' ft':''}), paid as ${n(L,0)} LF.</p>`;
+if(B>0&&B>L)h+=`<p class="mut">Drilled length is ${n(B-L,0)} ft (${n((B/L-1)*100,0)}%) longer than the paid length; that extra drilling and every extra conduit are in your unit price.</p>`;
+if(B>0&&B<L)h+='<p class="soon">Drilled length is shorter than the straight-line pay length; check your numbers.</p>';
+$('pOut').innerHTML=h+`<p class="mut">To recover a cost per drilled foot of conduit bundle, price per paid LF ≈ cost × ${n((B>0?B:L)/L,2)}.</p>`}
+['pL','pB','pN','pX','pP'].forEach(k=>$(k).addEventListener('input',pay));pay();
+// 4. Joint test
+function joint(){const w=$('jW').value==='w',P=$('jP').value,T=$('jT').value,G=$('jG').value,need=w?5:2,max=w?0:0.1;
+let h=`<p>Spec: <b>${w?'water tight':'soil tight'}</b>, sustained <b>${need} psi</b> for <b>60 minutes</b>, leakage <b>${w?'none':'0.1 gallon or less'}</b>.</p>`;
+if(P===''||G===''){$('jOut').innerHTML=h+'<p class="mut">Enter pressure and leakage to compare.</p>';return}
+const ok1=+P>=need,ok2=(+T||0)>=60,ok3=+G<=max;h+=`<p class="${ok1?'ok':'no'}">${ok1?'✓':'✗'} Pressure ${n(P,1)} psi ${ok1?'meets':'is below'} ${need} psi</p><p class="${ok2?'ok':'no'}">${ok2?'✓':'✗'} Duration ${n(+T||0,0)} min ${ok2?'meets':'is under'} 60 min</p><p class="${ok3?'ok':'no'}">${ok3?'✓':'✗'} Leakage ${n(G,2)} gal ${ok3?'within':'over'} ${w?'zero':'0.1 gal'}</p>`;
+$('jOut').innerHTML=h+(ok1&&ok2&&ok3?'<p class="ok">Numbers meet 555-3.1.2. Submit results to the Engineer.</p>':'<p class="no">Numbers do not meet 555-3.1.2 as entered.</p>')}
+['jW','jP','jT','jG'].forEach(k=>$(k).addEventListener('input',joint));joint();
+// 5. Bore Path Report
+const BF=['b1','b1f','b1p','b2','b3','b4','b5f','b6'];let BR=ls('b411.bpr')||{f:{},p:[]};if(!Array.isArray(BR.p))BR.p=[];BF.forEach(k=>{if(BR.f&&BR.f[k]!=null)$(k).value=BR.f[k]});
+if(!BR.p.length)BR.p=[{},{},{}];
+const PK=['id','s','o','e','note'];
+function prow(){$('pts').innerHTML=BR.p.map((p,i)=>`<tr>${PK.map(k=>`<td><input data-i="${i}" data-k="${k}" aria-label="Point ${i+1} ${k==='id'?'station':k==='s'?'distance along bore':k==='o'?'offset':k==='e'?'top elevation':'note'}" value="${esc(p[k]||'')}"${k==='s'||k==='o'||k==='e'?' inputmode="decimal"':''}></td>`).join('')}<td><button type="button" class="btn s" style="padding:4px 10px;margin:0" data-del="${i}" aria-label="Delete point ${i+1}">×</button></td></tr>`).join('')}
+function bsave(){BR.f={};BF.forEach(k=>BR.f[k]=$(k).value);ls('b411.bpr',BR)}
+function brep(){const f=k=>$(k).value.trim(),P=BR.p.filter(p=>PK.some(k=>String(p[k]||'').trim()!==''));
+const L=['BORE PATH REPORT (FDOT Standard Specifications FY 2026-27, Section 555-5.1)','Prepared '+new Date().toLocaleDateString('en-US'),'',
+'1. Project location: '+(f('b1')||'[ ]'),'   Financial project number: '+(f('b1f')||'[ ]'),'   Permit number: '+(f('b1p')||'[none assigned]'),
+'2. Data collected by: '+(f('b2')||'[name, title, position, company]'),'3. Site location: '+(f('b3')||'[plans station or permanent structure]'),'4. Detection method: '+f('b4'),
+'5. Elevations and offsets (555-3.2): reference feature '+(f('b5f')||'[Engineer-approved permanent fixed feature]'),'',
+['Point/station','Dist along bore ft','Offset ft','Top elev ft','Note'].join(' | ')].concat(P.map(p=>[p.id||'',p.s||'',p.o||'',p.e||'',p.note||''].join(' | ')));
+if(f('b6'))L.push('','Bore notes: '+f('b6'));L.push('','Draft from bore411.com/fdot-bore.html. Check against the contract, plans and Engineer requirements.');$('bOut').textContent=L.join('\n');
+const S=P.map(p=>parseFloat(p.s)).filter(x=>!isNaN(x)).sort((a,b)=>a-b);let gap=0;for(let i=1;i<S.length;i++)gap=Math.max(gap,S[i]-S[i-1]);
+const miss=P.filter(p=>String(p.o||'').trim()===''||String(p.e||'').trim()==='').length;
+$('bChk').innerHTML=`<p class="${P.length>=3?'ok':'no'}">${P.length>=3?'✓':'✗'} ${P.length} point${P.length===1?'':'s'} filled (spec minimum 3)</p>`+(miss?`<p class="soon">${miss} point${miss===1?' is':'s are'} missing an offset or elevation.</p>`:'')+(S.length>1?`<p class="mut">Largest spacing between points: ${n(gap,1)} ft.</p>`:'')}
+function bupd(){bsave();brep()}
+prow();brep();
+BF.forEach(k=>$(k).addEventListener('input',bupd));
+$('pts').addEventListener('input',e=>{const t=e.target;if(t.dataset.k){BR.p[+t.dataset.i][t.dataset.k]=t.value.slice(0,80);bupd()}});
+$('pts').addEventListener('click',e=>{const d=e.target.dataset.del;if(d!=null){BR.p.splice(+d,1);prow();bupd()}});
+$('addPt').onclick=()=>{BR.p.push({});prow();bupd();const r=$('pts').lastElementChild;if(r)r.querySelector('input').focus()};
+$('imp').onclick=()=>{let BL;try{BL=JSON.parse(localStorage.getItem('b411_borelog'))}catch(e){}
+if(!BL||!Array.isArray(BL.rods)||!BL.rods.length||BL.p0===''||isNaN(+BL.p0)){$('impOut').innerHTML='<p class="soon">No bore log with rods found on this device. Log rods in <a href="/calc.html#log">bore calculator card 6</a> first.</p>';return}
+const rl=+BL.rl||10,sg=+BL.sg||-1,ev=Math.max(1,Math.round(+$('iEv').value||1)),E=$('iE').value.trim(),hasE=E!==''&&!isNaN(+E);let prev=+BL.p0*sg,s=0,x=0,z=0;const out=[];
+BL.rods.forEach((r,i)=>{const cur=+r.p*sg,a=(Math.atan(prev/100)+Math.atan(cur/100))/2;s+=rl;x+=rl*Math.cos(a);z+=rl*Math.sin(a);prev=cur;if((i+1)%ev===0||i===BL.rods.length-1)out.push({id:'Rod '+(i+1),s:x.toFixed(1),o:'',e:hasE?(+E-z).toFixed(2):'',note:('calc. head depth '+z.toFixed(2)+' ft below entry (est.)'+(r.n?'; '+r.n:'')).slice(0,80)})});
+BR.p=BR.p.filter(p=>PK.some(k=>String(p[k]||'').trim()!=='')).concat(out);prow();bupd();
+$('impOut').innerHTML=`<p class="ok">Imported ${out.length} point${out.length===1?'':'s'}${BL.job?' from "'+esc(BL.job)+'"':''}.</p><p class="mut">Add offsets to the fixed feature and correct elevations to top of product before submitting.</p>`};
+const dl=(t,name,type)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type}));a.download=name;document.body.appendChild(a);a.click();a.remove()};
+const fname=()=>('bore-path-report-'+($('b1f').value||$('b1').value||'draft')).replace(/[^\w-]+/g,'-').slice(0,60);
+$('bCopy').onclick=()=>{const t=$('bOut').textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{const b=$('bCopy');b.textContent='Copied';setTimeout(()=>b.textContent='Copy report',1600)},()=>prompt('Copy the report:',t))};
+$('bTxt').onclick=()=>dl($('bOut').textContent,fname()+'.txt','text/plain');
+$('bCsv').onclick=()=>{const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';dl([['Point/station','Distance along bore ft','Offset ft','Top elevation ft','Note']].concat(BR.p.map(p=>PK.map(k=>p[k]||''))).map(r=>r.map(q).join(',')).join('\n'),fname()+'.csv','text/csv')};
+$('bClr').onclick=()=>{if(confirm('Clear the report fields and points on this device?')){BR={f:{},p:[{},{},{}]};BF.forEach(k=>{$(k).value=k==='b4'?'Walkover':''});prow();bupd()}};
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6996884592ac45e8816a84907f9ebea2"}'></script><!-- End Cloudflare Web Analytics -->
+</body></html>
