@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Davis-Bacon wage rates for HDD &amp; underground work near Arcadia, FL — Bore411</title><meta name="description" content="Free Davis-Bacon wage desk for DeSoto, Charlotte, Hardee, Highlands, Sarasota, Manatee, Lee, Glades, Hendry and Polk: current DOL Heavy and Highway wage determinations, HDD operator and locator rates, Florida $15 minimum wage check and a crew wage-floor calculator.">
+<link rel="canonical" href="https://bore411.com/wages.html"><meta property="og:type" content="website"><meta property="og:site_name" content="Bore411"><meta property="og:title" content="Davis-Bacon wage rates for HDD &amp; underground work near Arcadia, FL — Bore411"><meta property="og:description" content="Current DOL Heavy and Highway wage determinations for 10 counties around Arcadia, with a crew wage-floor calculator for federally funded HDD and underground bids."><meta property="og:url" content="https://bore411.com/wages.html"><meta property="og:image" content="https://bore411.com/images/hero-hdd-rig-v3.jpg"><meta property="og:image:width" content="1280"><meta property="og:image:height" content="720"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+<style>.wpick{display:grid;gap:10px;grid-template-columns:1fr}@media(min-width:760px){.wpick{grid-template-columns:1fr 1fr auto}}
+.wpick label,.crew label{display:block;font-size:.85rem;color:var(--mut);margin:0 0 4px}
+.seg{display:flex;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{flex:1;background:var(--panel);color:var(--txt);border:0;padding:12px 14px;font-weight:800;cursor:pointer;font-size:.95rem}.seg button[aria-pressed=true]{background:var(--or);color:#111}
+#wtbl td.n,#wtbl th.n{text-align:right;white-space:nowrap}#wtbl tr.ug td:first-child{border-left:3px solid var(--or)}.src{font-size:.8rem;color:var(--mut)}
+.crow{display:grid;grid-template-columns:1fr 84px 40px;gap:8px;align-items:end;margin:0 0 8px}.crow select,.crow input{padding:9px;font-size:.92rem}.crow button{background:none;border:1px solid var(--line);color:var(--mut);border-radius:8px;height:42px;cursor:pointer;font-size:1.1rem}
+.ctot td{font-weight:800}.pill{display:inline-block;font-size:.75rem;font-weight:800;padding:1px 7px;border-radius:10px;background:#3a2a14;color:#ffd23f;margin-left:4px;white-space:nowrap}
+@media print{header.top,.apwa,footer,.noprint,nav{display:none!important}body{background:#fff;color:#000}.card{border:1px solid #999;background:#fff}a{color:#000}.mut,.src{color:#333}}</style></head><body>
+<div class="apwa" aria-hidden="true"><i style="background:#e4002b"></i><i style="background:#ffd100"></i><i style="background:#ff6a13"></i><i style="background:#0072ce"></i><i style="background:#a05eb5"></i><i style="background:#43b02a"></i><i style="background:#fff"></i><i style="background:#ff69b4"></i></div>
+<div class="wrap"><header class="top"><a class="logo" href="/" style="text-decoration:none;color:var(--txt)">BORE<b>411</b></a><nav class="links"><a href="/#leads">Leads</a><a href="/tools.html">811 calculator</a><a href="/marks.html">Marks &amp; cover</a><a href="/calc.html">Bore calculators</a><a href="/permits.html">ROW permits</a><a href="/licenses.html">Licensing</a><a href="/benchmarks.html">Price benchmarks</a><a href="/rigs.html">Rig sizes</a><a href="/crews.html">Crews</a><a href="/equipment.html">Equipment</a><a href="/#alerts">Get alerts</a></nav></header></div>
+<main class="wrap"><section style="border-top:0">
+<h1 style="margin:6px 0 10px">Davis-Bacon wage desk: HDD &amp; underground</h1>
+<p class="mut">When a public job is paid with federal money, the bid package carries a U.S. Department of Labor wage determination (WD): the lowest base wage plus fringe you may pay each trade on site. This page shows the current Heavy and Highway WDs for the 10 counties around Arcadia, flags which ones have an HDD operator and locator rate, checks each rate against Florida's minimum wage, and works out a crew's daily wage floor for your bid. <b>Informational only — not legal advice.</b></p>
+<div class="warn"><b>The WD in your bid documents governs.</b> Use the wage determination number and modification printed in the solicitation; a revised WD issued at least 10 calendar days before bid opening applies to a sealed bid (<a href="https://www.ecfr.gov/current/title-29/subtitle-A/part-1/section-1.6" target="_blank" rel="noopener">29 CFR 1.6(c)(2)(ii)(A)</a>). The contracting agency picks the construction type (Heavy or Highway); it is printed on the WD. Rates here were copied from SAM.gov on <span id="fetched">November 16, 2026</span>.</div>
+<p class="noprint"><a class="btn p" href="#rates">County rates</a> <a class="btn s" href="#crew">Crew wage floor</a> <a class="btn s" href="#rules">How it works</a></p>
+</section>
+
+<section id="rates"><h2>1. Wage rates by county</h2>
+<div class="wpick noprint">
+<div><label for="wc">County</label><select id="wc"></select></div>
+<div><span id="wtl" class="mut" style="display:block;font-size:.85rem;margin:0 0 4px">Construction type</span><div class="seg" role="group" aria-labelledby="wtl"><button type="button" data-t="Heavy" aria-pressed="true">Heavy</button><button type="button" data-t="Highway" aria-pressed="false">Highway</button></div></div>
+<div><span class="mut" style="display:block;font-size:.85rem;margin:0 0 4px">Show</span><div class="seg" role="group" aria-label="Which classifications to show"><button type="button" id="wUg" aria-pressed="true">Underground crew</button><button type="button" id="wAll" aria-pressed="false">All</button></div></div>
+</div>
+<div id="wHead" class="out" aria-live="polite" style="margin-top:14px"><p class="mut">Loading wage determinations…</p></div>
+<div class="tbl"><table id="wtbl"></table></div>
+<p class="src">Orange left edge = classes an HDD or underground utility crew usually staffs (our filter, not DOL's). "Below FL min" means the WD base rate is under Florida's $15.00 minimum wage (Fla. Const. Art. X, §24(c), in effect since Sept. 30, 2026); Florida's minimum still applies to all hours worked in Florida, so a lower WD rate does not lower it. Survey rates can be old: "Survey 2009" rates come from a 2009 DOL survey and stay in effect until a new survey.</p>
+</section>
+
+<section id="crew"><h2>2. Crew wage floor for your bid</h2>
+<div class="grid two">
+<div class="card crew"><h3>Your crew on this WD</h3>
+<p class="mut">Pick each class you'll put on site and how many workers. Classes come from the WD picked above.</p>
+<div id="crows"></div>
+<p><button type="button" class="btn s" id="cAdd" style="padding:8px 14px">+ Add a class</button></p>
+<div class="grid two" style="gap:10px"><div><label for="cHrs">Hours per day</label><input id="cHrs" type="number" min="1" max="24" step="0.5" value="10" inputmode="decimal"></div><div><label for="cDays">Days per week</label><input id="cDays" type="number" min="1" max="7" step="1" value="5" inputmode="numeric"></div></div>
+<p class="src">Hours and days are yours to set; 10 × 5 is only a starting point.</p></div>
+<div class="card"><h3>Wage floor (est.)</h3><div id="cOut" class="out" aria-live="polite"><p class="mut">Add a class to see the floor.</p></div>
+<p class="noprint"><a class="btn p" id="cBid" href="/benchmarks.html#bidsheet">Put daily floor in the bid sheet</a> <button type="button" class="btn s" id="cCopy">Copy</button> <span id="cMsg" class="mut" aria-live="polite"></span></p>
+<p class="src">Floor per hour = the higher of the WD total (base + fringe; fringe may be paid as cash or bona fide benefits, 29 CFR 5.5(a)(1)(i)) and Florida's $15.00 minimum. Hours over 40 in a week add half the cash base rate (overtime at 1.5× the basic rate, 29 CFR 5.5(b)(1); Contract Work Hours and Safety Standards Act, contracts over $100,000). <b>Wages only:</b> payroll taxes, workers' comp, insurance, per diem and your margin are not included, so add your burden in the bid sheet.</p></div>
+</div>
+</section>
+
+<section id="rules"><h2>3. How Davis-Bacon works on a bid</h2>
+<div class="grid two">
+<div class="card"><h3>When it applies</h3><p>Federal construction contracts over $2,000 must state the minimum wages for each class of laborers and mechanics (<a href="https://www.law.cornell.edu/uscode/text/40/3142" target="_blank" rel="noopener">40 U.S.C. §3142(a)</a>). Many federally <i>assisted</i> local jobs carry the same clauses under related acts. The solicitation will say so and attach the WD; if it doesn't, ask the agency before you bid.</p></div>
+<div class="card"><h3>No HDD class on the WD?</h3><p>Most of these county WDs list no horizontal directional drill operator or locator. A class you need that isn't listed is added after award by <b>conformance</b>: the contracting officer requests it and the rate must bear a reasonable relationship to the WD (<a href="https://www.ecfr.gov/current/title-29/subtitle-A/part-5/subpart-A/section-5.5" target="_blank" rel="noopener">29 CFR 5.5(a)(1)(iii)</a>). Ask in your pre-bid questions which rate the agency expects for the drill operator and locator.</p></div>
+<div class="card"><h3>Subs are covered too</h3><p>The prime must put the wage clauses and WD into every subcontract and is responsible for the subs' compliance (29 CFR 5.5(a)(6)). If you sub the bore, expect the prime to ask for your payrolls.</p></div>
+<div class="card"><h3>Weekly certified payroll</h3><p>Each contractor and sub submits certified payrolls weekly for every week covered work is done; DOL's optional form is <a href="https://www.dol.gov/agencies/whd/forms/wh347" target="_blank" rel="noopener">WH-347</a> (29 CFR 5.5(a)(3)(ii)). Keep payroll records at least 3 years after the prime contract is done (29 CFR 5.5(a)(3)(i)).</p></div>
+</div>
+<p class="mut" style="margin-top:14px">Bore411 does not bid work, take a percentage of any job, or hold or share contractor licenses. For wage questions on a live contract, ask the contracting agency or the <a href="https://www.dol.gov/agencies/whd/government-contracts/construction" target="_blank" rel="noopener">DOL Wage and Hour Division</a>.</p>
+<h3>Sources</h3>
+<ul class="src" style="font-size:.85rem">
+<li>U.S. Department of Labor general wage determinations, published on <a href="https://sam.gov/content/wage-determinations" target="_blank" rel="noopener">SAM.gov</a> (Heavy: FL20260092, 0093, 0101, 0108, 0120, 0122, 0131, 0133, modification 1 of 05/18/2026; Highway: FL20260238, 0242, 0251, 0255, 0257, 0267, 0269, modification 2 of 08/13/2026). Every Florida 2026 WD numbered 0001–0300 was scanned for these 10 counties; dredging WDs left out. Copied November 16, 2026; the table links each WD on SAM.gov.</li>
+<li><a href="https://www.flsenate.gov/Laws/Constitution" target="_blank" rel="noopener">Florida Constitution, Art. X, §24(c)</a>: minimum wage reaches $15.00 per hour on September 30, 2026 (checked November 16, 2026).</li>
+<li><a href="https://www.ecfr.gov/current/title-29/subtitle-A/part-1/section-1.6" target="_blank" rel="noopener">29 CFR 1.6</a> and <a href="https://www.ecfr.gov/current/title-29/subtitle-A/part-5/subpart-A/section-5.5" target="_blank" rel="noopener">29 CFR 5.5</a> (eCFR, current as of November 2026); <a href="https://www.law.cornell.edu/uscode/text/40/3142" target="_blank" rel="noopener">40 U.S.C. §3142</a>.</li>
+</ul>
+<p class="src">Rates refresh with <code>scripts/gen_wages.py</code>, which rewrites <code>wages.json</code> from SAM.gov. Related: <a href="/benchmarks.html#bidsheet">bid sheet</a> · <a href="/licenses.html">licensing</a> · <a href="/subs.html">sub board</a>.</p>
+</section></main>
+<footer><div class="wrap">Informational only. Spec text summarized from FDOT's published Standard Specifications; read the full sections and your contract. Bore411 is a free information board: it does not bid work, take a percentage of any job, or hold or share contractor licenses.<br>© 2026 Bore411</div></footer>
+<script>
+(function(){
+const $=id=>document.getElementById(id),esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FLMIN=15.00,UG=/DIRECTIONAL|BACKHOE|EXCAVATOR|TRACKHOE|SKID|BOBCAT|PIPELAYER|COMMON OR GENERAL|TRUCK DRIVER|LOADER|POWER TOOL|FLAGGER|TRAFFIC CONTROL|MECHANIC|GRADE CHECKER/i,HDD=/DIRECTIONAL/i;
+const AREA={DeSoto:'a09',Hardee:'a09',Highlands:'a09',Glades:'a09',Hendry:'a09',Charlotte:'a10',Lee:'a10',Sarasota:'a10',Manatee:'a10',Polk:'a08'};
+const m=x=>'$'+x.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const ls=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
+let W=null,C='DeSoto',T='Heavy',ugOnly=true,crew=ls('b411.wagecrew')||{},txt='';
+const q=new URLSearchParams(location.search);
+function srcOf(id,eff){if(/^SU[A-Z]{2}(\d{4})/.test(id))return 'Survey '+id.match(/^SU[A-Z]{2}(\d{4})/)[1];if(/^UAVG/.test(id))return 'Union avg. '+eff;if(/^SA/.test(id))return 'State adopted '+eff;if(/^SC/.test(id))return 'Supplemental '+eff;return 'Union rate '+eff}
+function cur(){const id=W.counties[C][T];return id?{id,...W.wd[id]}:null}
+function floor(r){const b=r[3]||0,f=r[4]||0;return Math.max(b+f,FLMIN)}
+function draw(){
+  document.querySelectorAll('[data-t]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===T));
+  $('wUg').setAttribute('aria-pressed',ugOnly);$('wAll').setAttribute('aria-pressed',!ugOnly);
+  const w=cur();if(!w){$('wHead').innerHTML='<p class="mut">No '+T+' WD found for '+esc(C)+' County. Data being compiled.</p>';$('wtbl').innerHTML='';return}
+  const mod=w.mods.length?w.mods[w.mods.length-1]:null,hdd=w.rows.filter(r=>HDD.test(r[2]));
+  const old=w.rows.filter(r=>/^SU[A-Z]{2}2009/.test(r[0])).length;
+  let h=`<p><b>${esc(w.id)}</b> · ${esc(w.type)} · modification ${mod?esc(mod[0])+' of '+esc(mod[1]):'—'} · <a href="https://sam.gov/wage-determination/${esc(w.id)}/${w.rev}" target="_blank" rel="noopener">official WD on SAM.gov ↗</a></p><p class="mut">Covers: ${esc(w.counties)}.</p>`;
+  h+=hdd.length?`<p class="ok" style="font-weight:700">This WD lists a horizontal directional drill operator / locator rate: ${m(hdd[0][3])} + ${m(hdd[0][4])} fringe = ${m(hdd[0][3]+hdd[0][4])}/hr.</p>`:`<p><span class="soon">No horizontal directional drill operator or locator class on this WD.</span> If you'll staff one, the rate is set after award by conformance (see <a href="#rules">How it works</a>); ask the agency in pre-bid questions.</p>`;
+  if(old)h+=`<p class="mut">${old} of ${w.rows.length} rates on this WD come from a 2009 wage survey.</p>`;
+  $('wHead').innerHTML=h;
+  const rows=w.rows.filter(r=>r[3]!=null&&(!ugOnly||UG.test(r[2])));
+  $('wtbl').innerHTML=`<caption>${esc(C)} County, ${esc(T)}: ${ugOnly?'underground crew classes':'all classes'} (${rows.length} of ${w.rows.filter(r=>r[3]!=null).length})</caption><tr><th scope="col">Classification</th><th scope="col" class="n">Base</th><th scope="col" class="n">Fringe</th><th scope="col" class="n">Total/hr</th><th scope="col">Rate source</th></tr>`+
+   rows.map(r=>`<tr class="${UG.test(r[2])?'ug':''}"><td>${esc(r[2])}${r[3]<FLMIN?'<span class="pill">Below FL min</span>':''}</td><td class="n">${m(r[3])}</td><td class="n">${r[4]==null?'<span class="mut">blank</span>':m(r[4])}</td><td class="n"><b>${m(r[3]+(r[4]||0))}</b></td><td class="mut" style="font-size:.85rem">${esc(srcOf(r[0],r[1]))}</td></tr>`).join('')||'<tr><td colspan="5" class="mut">No underground crew classes on this WD. Pick "All".</td></tr>';
+  drawCrew();
+}
+function key(){return C+'|'+T}
+function drawCrew(){
+  const w=cur(),box=$('crows');if(!w){box.innerHTML='';$('cOut').innerHTML='';return}
+  const rs=w.rows.filter(r=>r[3]!=null);let list=crew[key()];
+  if(!list){const pick=re=>{const i=rs.findIndex(r=>re.test(r[2]));return i<0?null:i};list=[];
+    const a=pick(HDD),b=pick(/BACKHOE|EXCAVATOR|TRACKHOE/),c=pick(/COMMON OR GENERAL/),d=pick(/TRUCK DRIVER/);
+    [[a,1],[b,1],[c,2],[d,1]].forEach(([i,n])=>{if(i!=null)list.push({c:rs[i][2],n})})}
+  box.innerHTML=list.map((x,i)=>`<div class="crow"><div><label for="cc${i}">Class</label><select id="cc${i}" data-i="${i}">${rs.map(r=>`<option${r[2]===x.c?' selected':''}>${esc(r[2])}</option>`).join('')}</select></div><div><label for="cn${i}">Workers</label><input id="cn${i}" data-i="${i}" type="number" min="0" max="50" step="1" value="${x.n}" inputmode="numeric"></div><button type="button" data-del="${i}" aria-label="Remove this class">×</button></div>`).join('')||'<p class="mut">No classes yet.</p>';
+  crew[key()]=list;calc();
+}
+function calc(){
+  const w=cur();if(!w)return;const rs=w.rows.filter(r=>r[3]!=null),list=crew[key()]||[];ls('b411.wagecrew',crew);
+  const hrs=Math.max(0,parseFloat($('cHrs').value)||0),days=Math.max(1,parseInt($('cDays').value)||1),wk=hrs*days,ot=Math.max(0,wk-40);
+  let day=0,week=0,heads=0,lines=[],L=[];
+  list.forEach(x=>{const r=rs.find(r=>r[2]===x.c);if(!r||!(x.n>0))return;const f=floor(r),cash=Math.max(r[3],FLMIN),wkw=(f*wk+0.5*cash*ot)*x.n;heads+=x.n;week+=wkw;
+    lines.push(`<tr><td>${x.n} × ${esc(r[2].length>60?r[2].slice(0,58)+'…':r[2])}${r[3]+(r[4]||0)<FLMIN?'<span class="pill">FL min</span>':''}</td><td class="n">${m(f)}</td><td class="n">${m(wkw/days)}</td></tr>`);
+    L.push(x.n+' x '+r[2]+': '+m(f)+'/hr floor'+(r[3]+(r[4]||0)<FLMIN?' (FL $15.00 minimum)':' (WD '+m(r[3])+' + '+m(r[4]||0)+')'))});
+  day=week/days;
+  if(!heads){$('cOut').innerHTML='<p class="mut">Add workers to see the floor.</p>';txt='';$('cBid').href='/benchmarks.html?area='+AREA[C]+'#bidsheet';return}
+  $('cOut').innerHTML=`<div class="tbl"><table><tr><th scope="col">Crew</th><th scope="col" class="n">$/hr each</th><th scope="col" class="n">$/day</th></tr>${lines.join('')}<tr class="ctot"><td>${heads} workers, ${hrs} h × ${days} days</td><td></td><td class="n">${m(day)}</td></tr></table></div><p>Daily wage floor (est.)</p><div class="big">${m(day)}/day</div><p class="mut">${m(week)} per ${days}-day week${ot?`, including overtime premium for ${ot} h over 40`:''}. ${esc(w.id)}, ${esc(C)} County ${esc(T)}.</p>`;
+  $('cBid').href='/benchmarks.html?area='+AREA[C]+'&labor='+Math.round(day)+'#bidsheet';
+  txt=['Bore411 Davis-Bacon crew wage floor ('+new Date().toLocaleDateString('en-US')+'), estimate only',C+' County, '+T+' WD '+w.id+' mod '+(w.mods.length?w.mods[w.mods.length-1].join(' of '):''),...L,hrs+' h/day x '+days+' days/week'+(ot?' ('+ot+' h overtime at +0.5x cash base)':''),'Daily wage floor: '+m(day)+' | Weekly: '+m(week),'Wages only: add payroll taxes, workers comp, insurance. The WD in the bid documents governs.','https://bore411.com/wages.html'].join('\n');
+}
+$('crows').addEventListener('change',e=>{const i=e.target.dataset.i;if(i==null)return;const l=crew[key()];if(e.target.tagName==='SELECT')l[i].c=e.target.value;else l[i].n=Math.max(0,parseInt(e.target.value)||0);calc()});
+$('crows').addEventListener('input',e=>{if(e.target.tagName==='INPUT'){crew[key()][e.target.dataset.i].n=Math.max(0,parseInt(e.target.value)||0);calc()}});
+$('crows').addEventListener('click',e=>{const d=e.target.dataset.del;if(d==null)return;crew[key()].splice(+d,1);drawCrew()});
+$('cAdd').onclick=()=>{const w=cur();if(!w)return;const rs=w.rows.filter(r=>r[3]!=null);(crew[key()]=crew[key()]||[]).push({c:rs[0][2],n:1});drawCrew()};
+['cHrs','cDays'].forEach(id=>$(id).addEventListener('input',calc));
+$('cCopy').onclick=()=>{if(!txt){$('cMsg').textContent='Add workers first.';return}(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>{$('cMsg').textContent='Copied.'},()=>{$('cMsg').textContent='Copy failed; select and copy by hand.'})};
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{T=b.dataset.t;sync();draw()});
+$('wUg').onclick=()=>{ugOnly=true;draw()};$('wAll').onclick=()=>{ugOnly=false;draw()};
+$('wc').onchange=()=>{C=$('wc').value;sync();draw()};
+function sync(){const u=new URL(location.href);u.searchParams.set('county',C.toLowerCase());u.searchParams.set('type',T.toLowerCase());history.replaceState(null,'',u.pathname+u.search+u.hash)}
+fetch('/wages.json').then(r=>r.json()).then(d=>{W=d;const names=Object.keys(d.counties);
+  $('wc').innerHTML=names.map(n=>`<option value="${n}">${n} County</option>`).join('');
+  const qc=(q.get('county')||'').toLowerCase().replace(/[^a-z]/g,''),qt=(q.get('type')||'').toLowerCase();
+  const hit=names.find(n=>n.toLowerCase()===qc);if(hit)C=hit;if(qt==='highway')T='Highway';$('wc').value=C;
+  if(d.fetched){const f=new Date(d.fetched+'T12:00:00');$('fetched').textContent=f.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}
+  draw()}).catch(()=>{$('wHead').innerHTML='<p class="mut">Wage data failed to load. See the WDs directly on <a href="https://sam.gov/content/wage-determinations" target="_blank" rel="noopener">SAM.gov</a>.</p>'});
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6996884592ac45e8816a84907f9ebea2"}'></script><!-- End Cloudflare Web Analytics -->
+</body></html>

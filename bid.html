@@ -17,6 +17,8 @@ const st=/\bFDOT\b|department of transportation|\b(SR|S\.R\.|state road|US|U\.S\
 let h='';if(st)h+='<p><b>State road mentioned.</b> The posting mentions FDOT or a state/U.S. route. Utility work on state right-of-way is permitted by FDOT through <a href="https://osp.fdot.gov/" target="_blank" rel="noopener">One Stop Permitting</a>. On FDOT contracts, directional bores follow Standard Specifications Section 555: <a href="/fdot-bore.html">checklist, deadlines and Bore Path Report builder</a>.</p>';
 h+=hits.length?'<p>County right-of-way cheat sheet: '+hits.map(c=>'<a href="/permits.html#'+c[0]+'">'+c[1]+' County</a>').join(', ')+'.</p>':'<p class="mut">This job\'s county is not in our cheat sheets yet. We cover 10 counties near Arcadia: <a href="/permits.html">see the list</a>.</p>';
 return h}
+function dbLine(l){const t=[l.title,l.agency,l.location,l.scope].join(' . '),hit=PC.find(c=>c[2].test(t)),fed=find(/davis[- ]bacon|prevailing wage|federal(ly)?[- ](funded|assisted|aid)|\b(SRF|USDA|FEMA|HUD|CDBG|ARPA|EPA)\b/i,t);
+return 'Federal wage rates (Davis-Bacon): '+(fed?'posting mentions <b>'+esc(fed)+'</b>, so look for a wage determination in the bid documents':'applies only if federal money is in the job '+'— check the solicitation')+'. <a href="/wages.html'+(hit?'?county='+hit[0]:'')+'">'+(hit?hit[1]+' County wage rates':'County wage rates')+' &amp; crew wage floor</a>'}
 function gisCard(l){const t=[l.title,l.agency,l.location,l.scope].join(' . ');const hits=PC.filter(c=>c[2].test(t));const st=/\bFDOT\b|department of transportation|\b(SR|S\.R\.|state road|US|U\.S\.)[ -]?\d+|\binterstate\b|\bI-\d+/i.test(t);
 let h=hits.map(c=>'<p><b>'+c[1]+' County</b></p>'+B.gisHtml(c[0])).join('');if(st)h+='<p><b>State road (FDOT)</b></p>'+B.gisHtml('fdot');
 return h||'<p class="mut">County not detected from the posting. See <a href="/permits.html#gis">GIS map links for all 10 counties</a>.</p>'}
@@ -37,7 +39,8 @@ el.innerHTML=`<span class="tag">${l.type==='bid'?'Public bid':'Sub work'}</span>
 <li>Certificate of insurance: ${ins?esc(ins):'limits '+chk}</li>
 <li>Bond: ${bond?esc(bond):'bid/performance bond '+chk}</li>
 <li>Pre-bid meeting: ${pre?esc(pre):'mandatory or not '+chk}</li>
-<li>License class: ${lic?esc(lic):'required license '+chk} (<a href="https://www.myfloridalicense.com/wl11.asp" target="_blank" rel="noopener">DBPR lookup</a>)</li></ul></div>
+<li>License class: ${lic?esc(lic):'required license '+chk} (<a href="https://www.myfloridalicense.com/wl11.asp" target="_blank" rel="noopener">DBPR lookup</a>)</li>
+<li>${dbLine(l)}</li></ul></div>
 <div class="card"><h3>Rig &amp; support equipment</h3><p>Estimated rig class: <b>${B.RIG[B.rigClass(l)]}</b>${B.rigClass(l)==='check'?' (pipe size not in the posting summary)':' (est.)'}</p><p class="mut" style="font-size:.85rem">Rough estimate from pipe size and footage in the summary text. Confirm with your drilling engineer and the plans. <a href="/rigs.html">How we estimate</a></p><ul class="chk"><li>Locator / tracking electronics</li><li>Mud mixing system and tank</li><li>Vac truck / vacuum system</li><li>Reamers sized to the product pipe</li></ul></div>
 <div class="card"><h3>Soil screening (USDA)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not a geotechnical report.</b> Mapped soil at one point near the job, from USDA NRCS SSURGO via Soil Data Access. Soils change across a bore path; get borings for design.</p>
 <label class="mut">Check soil at<select id="soilpt"></select></label>
