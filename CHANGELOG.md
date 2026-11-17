@@ -1,5 +1,10 @@
 # Bore411 changelog
 
+## 2026-11-17
+- Fix (live bug): six of the seven forms on the site were posting to a Formspree form ID that does not exist (`mjjoove`; Formspree answers "Form not found"), so every post-a-bore, sub board (sub needed and crew available), list-your-crew, message-this-crew and equipment submission since those forms launched was rejected and never reached Bore411. Found by checking each form endpoint with a GET (no test submissions sent). All of them now post to the working Formspree form already used by the daily lead alert signup (`mvkkzzbn`), told apart by a hidden `form_type` and an email `_subject`; the alert signup (`lead_alert`) and post-a-bore (`post_bore`) forms gained those fields, and the equipment form got a subject line. Files: `index.html`, `subs.html`, `crews.html`, `equipment.html`. No form fields, page layout, analytics or `leads.json` changed.
+- New `scripts/check_forms.py`: lists every Formspree form ID in the site's HTML/JS and GETs each endpoint (no submissions, nothing counted against the cap); exits 1 if any ID is missing. Run it after any form change. README now documents the single form and its `form_type` values.
+- Note: all forms now share the Formspree free plan's 50 submissions a month.
+
 ## 2026-11-16
 - New `wages.html` "Davis-Bacon wage desk: HDD & underground", for bidding public jobs paid with federal money (for example, EPA- or USDA-funded water and sewer work). From the U.S. Department of Labor general wage determinations on SAM.gov (copied Nov 16, 2026; every Florida 2026 WD numbered 0001–0300 scanned):
   - Pick a county (DeSoto, Charlotte, Hardee, Highlands, Sarasota, Manatee, Lee, Glades, Hendry, Polk) and Heavy or Highway: shows the WD number, modification and date (Heavy FL20260092/0093/0101/0108/0120/0122/0131/0133, mod 1 of 05/18/2026; Highway FL20260238/0242/0251/0255/0257/0267/0269, mod 2 of 08/13/2026), the counties it covers, a link to the official WD, and each class's base, fringe and total with its rate source (union rate date or survey year). "Underground crew" filter or all classes.
