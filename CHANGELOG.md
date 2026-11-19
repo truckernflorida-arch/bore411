@@ -1,5 +1,13 @@
 # Bore411 changelog
 
+## 2026-11-19
+- Bid pages: new "Road owner & traffic (FDOT)" card at the point picked in the soil card (town/county center or typed job-site coordinates), queried live in the browser from FDOT Transportation Data & Analytics open data (ArcGIS Online, free, no key; layers updated by FDOT Nov 17, 2026). It replaces guessing from the posting text with a lookup: the up to 6 nearest FDOT-inventoried roads within 1,000 ft, nearest first, each with its local name, U.S./state/county route number, FDOT roadway ID, straight-line distance, whether it is on the State Highway System (state road, FDOT permit) or off it (usually county or city), the FDOT District maintenance unit for state roads, AADT traffic count with its year, lanes (per side on divided roads) and maximum speed limit.
+  - When the nearest road is on the State Highway System, the card points to an FDOT utility permit through One Stop Permitting (Rule 14-46.001, F.A.C.), the FDOT cover/bore figures on `marks.html` and the Section 555 desk; otherwise to the county ROW cheat sheets, and it warns when a state road is also within 1,000 ft.
+  - Labeled screening-level, not a right-of-way survey. Notes that FDOT's inventory does not cover every local, subdivision or private road, that "county or city" is our reading of "off the State Highway System", and that traffic, lanes and speed are for maintenance-of-traffic planning, not a traffic control plan.
+- County pages (`county/*.html`) show the same card under the flood/wetlands card (added by `county.js`, no regeneration). Home page bid-desk list mentions it. The permit route card's note now points to the new card.
+- Files: `common.js` (`roadAt`, `roadHtml`), `bid.html`, `county.js`, `index.html`, `README.md`, `sitemap.xml`. No forms, analytics, CNAME or `leads.json` changed.
+- Note: USDA Soil Data Access was returning 502 errors again around 3:40 AM ET on Nov 19, 2026; the soil card shows its existing "may be down" message and the other cards work.
+
 ## 2026-11-18
 - Bid pages: new "Flood zone & wetlands (FEMA / USFWS)" card, at the point picked in the soil card (town/county center or typed job-site coordinates), queried live in the browser (free public services, no key):
   - FEMA National Flood Hazard Layer: flood zone at the point with FEMA's zone description, whether it is in a Special Flood Hazard Area (1%-annual-chance flood) at the point and within 1,000 ft, base flood elevation or AO depth when FEMA lists one, every zone within 1,000 ft, and the FIRM panel number with its effective date.
