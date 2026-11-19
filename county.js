@@ -16,10 +16,13 @@ nl.innerHTML=near.length?near.map(([l,mi])=>card(l,now,'about '+Math.round(mi)+'
 const sp=document.getElementById('pt'),so=document.getElementById('soilout'),ko=document.getElementById('sinkout');
 const kg=ko&&ko.closest('.grid');if(kg&&!document.getElementById('envout'))kg.insertAdjacentHTML('afterend','<div class="card" style="margin-top:14px"><h3>Flood zone &amp; wetlands (FEMA / USFWS)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not a flood zone determination or wetland delineation.</b> Town or county center, not a job site.</p><div id="envout" aria-live="polite"></div></div>');
 const eo=document.getElementById('envout');
+const eg=document.getElementById('envout');if(eg&&!document.getElementById('roadout'))eg.closest('.card').insertAdjacentHTML('afterend','<div class="card" style="margin-top:14px"><h3>Road owner &amp; traffic (FDOT)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not a right-of-way survey.</b> Roads within 1,000 ft of the town or county center (not a job site): state or county/city road, route numbers, traffic, lanes and speed.</p><div id="roadout" aria-live="polite"></div></div>');
+const ro=document.getElementById('roadout');
 sp.innerHTML=C.pts.map((p,i)=>`<option value="${i}">${esc(p[0])}</option>`).join('');
 const v=x=>x==null||x===''?'—':esc(x);
 function run(){const p=C.pts[+sp.value];if(!p)return;const [lab,lat,lon]=p;
 so.innerHTML='<p class="mut">Asking USDA Soil Data Access…</p>';ko.innerHTML='<p class="mut">Asking Florida Geological Survey…</p>';
+if(ro){ro.innerHTML='<p class="mut">Asking FDOT…</p>';B.roadHtml(lat,lon,lab).then(h=>{ro.innerHTML=h}).catch(e=>{ro.innerHTML='<p class="mut">FDOT road lookup failed ('+esc(e.message)+').</p>'})}
 if(eo){eo.innerHTML='<p class="mut">Asking FEMA and USFWS…</p>';B.envHtml(lat,lon,lab).then(h=>{eo.innerHTML=h}).catch(e=>{eo.innerHTML='<p class="mut">Flood and wetlands lookup failed ('+esc(e.message)+').</p>'})}
 B.soilAt(lat,lon).then(M=>{if(!M.length){so.innerHTML='<p class="mut">No mapped soil unit at that point.</p>';return}
 so.innerHTML=M.map(m=>{const wt=B.cmFt(m.wtdepannmin),rk=B.cmFt(m.brockdepmin);return `<div class="tbl"><table><caption>${esc(m.muname)}<div class="mut" style="font-weight:400">${esc(m.areaname||'')} · map unit ${esc(m.mukey)} · ${esc(lab)} (${lat.toFixed(4)}, ${lon.toFixed(4)})</div></caption>
