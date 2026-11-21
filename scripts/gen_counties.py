@@ -13,8 +13,14 @@ CT=[('desoto','DeSoto','Arcadia','09',r'\bde ?soto\b',['Arcadia']),
 ('lee','Lee','Fort Myers','10',r'\blee county\b|\blee co\b|fort myers|cape coral|lehigh acres|bonita springs',['Fort Myers','Cape Coral','Lehigh Acres','Bonita Springs']),
 ('glades','Glades','Moore Haven','09',r'\bglades\b|moore haven',['Moore Haven']),
 ('hendry','Hendry','LaBelle','09',r'\bhendry\b|labelle|la belle|clewiston',['LaBelle','Clewiston']),
-('polk','Polk','Bartow','08',r'\bpolk\b|lakeland|winter haven|bartow',['Bartow','Lakeland','Winter Haven'])]
-AREA={'09':'Area 09 (inland: DeSoto, Glades, Hardee, Hendry, Highlands, Okeechobee)','10':'Area 10 (Gulf coast: Charlotte, Collier, Lee, Manatee, Sarasota)','08':'Area 08 (Tampa Bay / Central, including Polk)'}
+('polk','Polk','Bartow','08',r'\bpolk\b|lakeland|winter haven|bartow',['Bartow','Lakeland','Winter Haven']),
+('hillsborough','Hillsborough','Tampa','08',r'\bhillsborough\b|\btampa\b|brandon|plant city|temple terrace|riverview|ruskin|apollo beach',['Tampa','Brandon','Plant City','Riverview']),
+('pinellas','Pinellas','Clearwater','08',r'\bpinellas\b|st\.? petersburg|clearwater|\blargo\b|dunedin|tarpon springs|palm harbor',['Clearwater','St. Petersburg','Largo']),
+('collier','Collier','East Naples','10',r'\bcollier\b|\bnaples\b|immokalee|marco island',['Naples','Immokalee','Marco Island']),
+('okeechobee','Okeechobee','Okeechobee','09',r'okeechobee (county|city|utility)|city of okeechobee|\bokeechobee,? (fl|florida)\b',['Okeechobee'])]
+# FDOT district per county (FDOT district maps); default One
+DIST={'hillsborough':'Seven','pinellas':'Seven'}
+AREA={'09':'Area 09 (inland: DeSoto, Glades, Hardee, Hendry, Highlands, Okeechobee)','10':'Area 10 (Gulf coast: Charlotte, Collier, Lee, Manatee, Sarasota)','08':'Area 08 (Tampa Bay / Central, including Polk, Hillsborough and Pinellas)'}
 head=re.search(r'<div class="apwa".*?</header></div>',P,re.S).group(0).replace(' class="on" href="/permits.html"',' href="/permits.html"')
 foot=re.search(r'<footer>.*?</footer>',P,re.S).group(0)
 def meta(title,desc,url):
@@ -41,7 +47,7 @@ for k,n,seat,area,rx,towns in CT:
 {jump(k)}
 <div class="grid g3" style="margin-top:18px">
 <div class="card"><h3>County seat</h3><p class="mut">{seat}</p></div>
-<div class="card"><h3>State roads</h3><p class="mut">FDOT District One. Utility permits on state right-of-way go through <a href="https://osp.fdot.gov/" target="_blank" rel="noopener">One Stop Permitting</a>.</p></div>
+<div class="card"><h3>State roads</h3><p class="mut">FDOT District {DIST.get(k,"One")}. Utility permits on state right-of-way go through <a href="https://osp.fdot.gov/" target="_blank" rel="noopener">One Stop Permitting</a>.</p></div>
 <div class="card"><h3>FDOT price area</h3><p class="mut">Market {AREA[area]}. <a href="/benchmarks.html#swfl">Bore &amp; conduit averages</a></p></div>
 <div class="card"><h3>Before you dig</h3><p class="mut">Call Sunshine 811 at least 2 full business days ahead (F.S. 556). <a href="/tools.html">811 dig-date calculator</a></p></div>
 </div></section>
@@ -50,7 +56,7 @@ for k,n,seat,area,rx,towns in CT:
 <section id="permit"><h2>Permits and maps</h2><div class="warn"><b>Informational only.</b> Not legal advice. Confirm with the permitting office before you bid or start work. Cities usually permit their own streets. County maps are not locates; your Sunshine 811 ticket and field verification govern.</div>
 <div class="grid two" style="margin-top:14px">{pc}
 <div class="card"><h3>{n} County GIS maps</h3>{gis[k]}</div></div>
-<p class="mut" style="margin-top:10px">All ten counties side by side: <a href="/permits.html#{k}">ROW permit cheat sheets</a>.</p></section>
+<p class="mut" style="margin-top:10px">All fourteen counties side by side: <a href="/permits.html#{k}">ROW permit cheat sheets</a>.</p></section>
 <section id="ground"><h2>Ground screening</h2><p class="mut">Pick a point. Results come live from USDA and the Florida Geological Survey. <b>Screening-level, not a geotechnical report.</b></p>
 <p><label for="pt" class="mut">Point:</label> <select id="pt" style="max-width:360px"></select></p>
 <div class="grid two"><div class="card"><h3>Soil (USDA)</h3><div id="soilout"></div></div><div class="card"><h3>Sinkhole reports (FGS)</h3><div id="sinkout"></div></div></div>
@@ -65,10 +71,10 @@ for k,n,seat,area,rx,towns in CT:
     open(R+f'county/{k}.html','w').write(meta(title,desc,url)+body)
 # hub
 cards=''.join(f'<div class="card"><h3><a href="/county/{k}.html" style="color:var(--txt);text-decoration:none">{n} County</a></h3><p class="mut">County seat {seat} · FDOT market area {area}</p><p style="margin:6px 0 0"><a href="/county/{k}.html">Leads, permits &amp; ground screen →</a></p></div>' for k,n,seat,area,*_ in CT)
-hub=meta('Florida county HDD bid pages near Arcadia — Bore411','County pages for HDD and underground utility work in DeSoto, Charlotte, Hardee, Highlands, Sarasota, Manatee, Lee, Glades, Hendry and Polk counties: open leads, right-of-way permits, GIS maps and soil and sinkhole screening.','https://bore411.com/counties.html')+f'''{head}
+hub=meta('Florida county HDD bid pages near Arcadia — Bore411','County pages for HDD and underground utility work in DeSoto, Charlotte, Hardee, Highlands, Sarasota, Manatee, Lee, Glades, Hendry, Polk, Hillsborough, Pinellas, Collier and Okeechobee counties: open leads, right-of-way permits, GIS maps and soil and sinkhole screening.','https://bore411.com/counties.html')+f'''{head}
 <div class="wrap"><section style="border-top:0"><h1>County pages</h1><p class="mut">One page per county around Arcadia: open leads in and near the county, the right-of-way permit route, official GIS maps, the FDOT price area, and a live soil and sinkhole screen.</p>
 <div class="grid two" style="margin-top:14px">{cards}</div>
-<p class="mut" style="margin-top:14px">Working outside these ten counties? Every lead still gets a <a href="/#leads">bid package</a> with soil and sinkhole screening anywhere in Florida.</p></section></div>
+<p class="mut" style="margin-top:14px">Working outside these fourteen counties? Every lead still gets a <a href="/#leads">bid package</a> with soil and sinkhole screening anywhere in Florida.</p></section></div>
 {foot}
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "6996884592ac45e8816a84907f9ebea2"}}'></script><!-- End Cloudflare Web Analytics -->
 </body></html>
