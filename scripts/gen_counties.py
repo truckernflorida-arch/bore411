@@ -45,6 +45,7 @@ for k,n,seat,area,rx,towns in CT:
 <h1>HDD &amp; underground utility bids in {n} County, FL</h1>
 <p class="mut">Open directional drilling, boring and trenching work in {n} County (county seat: {seat}) and within {cty['radius']} miles, plus where to pull the right-of-way permit, the county's public maps, the FDOT price area for bore and conduit work, and a live soil and sinkhole screen. Free; Bore411 does not bid work or take a cut.</p>
 {jump(k)}
+<h2 class="sr">{n} County at a glance</h2>
 <div class="grid g3" style="margin-top:18px">
 <div class="card"><h3>County seat</h3><p class="mut">{seat}</p></div>
 <div class="card"><h3>State roads</h3><p class="mut">FDOT District {DIST.get(k,"One")}. Utility permits on state right-of-way go through <a href="https://osp.fdot.gov/" target="_blank" rel="noopener">One Stop Permitting</a>.</p></div>
@@ -73,6 +74,7 @@ for k,n,seat,area,rx,towns in CT:
 cards=''.join(f'<div class="card"><h3><a href="/county/{k}.html" style="color:var(--txt);text-decoration:none">{n} County</a></h3><p class="mut">County seat {seat} · FDOT market area {area}</p><p style="margin:6px 0 0"><a href="/county/{k}.html">Leads, permits &amp; ground screen →</a></p></div>' for k,n,seat,area,*_ in CT)
 hub=meta('Florida county HDD bid pages near Arcadia — Bore411','County pages for HDD and underground utility work in DeSoto, Charlotte, Hardee, Highlands, Sarasota, Manatee, Lee, Glades, Hendry, Polk, Hillsborough, Pinellas, Collier and Okeechobee counties: open leads, right-of-way permits, GIS maps and soil and sinkhole screening.','https://bore411.com/counties.html')+f'''{head}
 <div class="wrap"><section style="border-top:0"><h1>County pages</h1><p class="mut">One page per county around Arcadia: open leads in and near the county, the right-of-way permit route, official GIS maps, the FDOT price area, and a live soil and sinkhole screen.</p>
+<h2 class="sr">Counties</h2>
 <div class="grid two" style="margin-top:14px">{cards}</div>
 <p class="mut" style="margin-top:14px">Working outside these fourteen counties? Every lead still gets a <a href="/#leads">bid package</a> with soil and sinkhole screening anywhere in Florida.</p></section></div>
 {foot}
