@@ -28,6 +28,8 @@ Free load board and Florida HDD bid desk for underground work (HDD, boring, tren
 - `leads.json` — rewritten daily: `type, title, agency, location, bid, due` (or `open_until`), `scope, source, url`.
 
 - `favicon.svg` — site icon, linked with `<link rel="icon">` in every page head (county pages via `scripts/gen_counties.py`). New pages should copy the same head lines.
+- Heading order: every page goes h1 → h2 → h3 with no skipped level (Lighthouse `heading-order`). Where cards (`h3`) sit right under the page `h1`, a screen-reader-only `<h2 class="sr">` names the group (`.sr` in `style.css`, visually hidden). New pages and `scripts/gen_counties.py` should keep this.
+- Home hero: `index.html` preloads `images/hero-hdd-rig-v3.jpg` with `fetchpriority="high"` because it is a CSS background (the page's largest paint) that the browser would otherwise find only after `style.css` loads. If the hero image changes, change the preload too.
 - Layout note: `style.css` sets `.grid>*{min-width:0}` so wide tables scroll inside `.tbl` instead of widening the page on phones; wrap tables in `<div class="tbl">` and use `<caption>` for a table title.
 
 - Forms: every form on the site posts to one Formspree form, `https://formspree.io/f/mvkkzzbn` (account truckernflorida@gmail.com), and is told apart by a hidden `form_type` (`lead_alert`, `post_bore`, `sub_needed`, `sub_available`, `crew_profile`, `crew_message`, `equipment`) and `_subject`. Free plan: 50 submissions a month shared by all forms. Run `python3 scripts/check_forms.py` after changing any form action; it only GETs each endpoint and fails if a form ID does not exist.
