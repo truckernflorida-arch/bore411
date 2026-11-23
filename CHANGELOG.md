@@ -1,5 +1,17 @@
 # Bore411 changelog
 
+## 2026-11-23
+- Bid pages: new "Contamination & cleanup sites (FDEP)" card at the point picked in the soil card (town/county center or typed job-site coordinates), queried live in the browser from Florida DEP open data (free, no key; checked Nov 23, 2026). It answers "am I drilling next to an old gas-station leak?" before you price the job:
+  - Counts of open, active or on-hold FDEP cleanup sites within 500 ft, 1/4 mile and 1/2 mile, split into petroleum storage tank discharges and other cleanups (drycleaners/waste cleanup, PFAS, brownfield sites, federal facilities, Superfund), from the DEP Cleanup Sites layer behind FDEP's Contamination Locator Map (closed sites are not in it).
+  - Whether the point is in, or within 1/4 mile of, a designated brownfield area (FDEP Brownfield Areas).
+  - The 8 nearest sites with distance, type, FDEP cleanup stage (petroleum: status of discharges not closed and the year of the oldest one, from Petroleum Contamination Monitoring; other sites: ERIC cleanup phase) and a link to the site's public FDEP document file.
+  - When a listed site is within 500 ft (Bore411's rule of thumb, labeled as such), a note to ask the owner or engineer about contaminated soil or groundwater on the bore path and who tests and hauls the returns and spoil, citing FDOT Utility Accommodation Manual 2017 §3.12 (contaminated soil on FDOT right of way: stop work and notify FDOT). Cleanup standards cited: Ch. 62-780, F.A.C.
+  - Example (live, Nov 23, 2026): a downtown Arcadia point (27.2159, -81.8584) shows 5 listed petroleum sites within 500 ft and 12 sites within 1/2 mile; DeSoto County center shows none.
+  - Operator, phone, staff and manager fields are never requested; site names containing "residence" are hidden. Screening-level, not an environmental site assessment.
+- County pages (`county/*.html`) show the same card after the geology card (added by `county.js`, no regeneration). Home page bid-desk list mentions it.
+- Files: `common.js` (`contamAt`, `contamHtml`), `bid.html`, `county.js`, `index.html`, `README.md`, `sitemap.xml`. No forms, analytics, CNAME or `leads.json` changed.
+- Still open: Formspree's free plan (50 submissions a month shared by all forms) needs a new account or login to replace or upgrade, so it was left alone. Image recompression still needs binary uploads.
+
 ## 2026-11-22
 - Accessibility: fixed the heading-order issue left open on Nov 14. Lighthouse (headless Chrome, live site, Nov 22, 2026) flagged `heading-order` on `calc.html`, `counties.html`, `equipment.html`, `licenses.html`, `subs.html`, `tools.html` and all 14 county pages, because the first cards (`h3`) came right after the page `h1`. Each of those pages now has a screen-reader-only `h2` naming that group ("Calculators", "Counties", "About the board", "License checker", "How the sub board works", "Dig-date calculator", "{County} County at a glance"), using a new visually hidden `.sr` class in `style.css`. Nothing changes on screen; screen-reader users get a correct outline. Local Lighthouse accessibility on the fixed pages: 100 (was 96–99 live).
 - Speed: the home page now preloads the hero photo (`images/hero-hdd-rig-v3.jpg`) with `fetchpriority="high"`. It is a CSS background and the page's largest paint, and the browser only discovered it after `style.css` loaded (Lighthouse mobile, live, before the change: 3.1 s largest contentful paint, 1.3 s of it load delay).
