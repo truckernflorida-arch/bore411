@@ -1,5 +1,19 @@
 # Bore411 changelog
 
+## 2026-11-24
+- Live check first (Nov 24, 2026, pinned to the GitHub Pages IP): home, bid, tools and county pages all returned 200; nothing broken.
+- Bid pages: new "Buried & overhead hazards (electric & pipelines)" card at the point picked in the soil card (town/county center or typed job-site coordinates), queried live in the browser from free public ArcGIS layers (no key, no login; checked Nov 24, 2026). It answers "is there a high-voltage line or a transmission pipeline at this site?" before you price a bore:
+  - Counts within 500 ft, 1,000 ft, 1/4 mile and 1/2 mile of (a) high-voltage electric transmission lines and (b) natural gas, petroleum product, HGL and crude oil transmission pipelines.
+  - Electric: DHS/CISA HIFLD Electric Power Transmission Lines, with distance, in-service status, overhead/underground type, voltage (or voltage class), owner when the layer lists one (many lines say "not listed") and each line's own source year (lines near Arcadia show 2015). The layer itself was last edited Sept 2023.
+  - Pipelines: EIA pipeline data as hosted by DOE NETL (natural gas interstate/intrastate/gathering, petroleum products, HGL, crude trunk), with pipeline name, product, class and operator company name where the layer gives them. EIA's natural gas layer is dated January 2020 (per the U.S. DOT-hosted copy of EIA's description); the other layers do not state a date, and the card says so.
+  - Within 1,000 ft (Bore411 rule of thumb, labeled as such): a note to ask the owner or engineer for the utility's required clearance from the pit, rig, pipe loader and mud equipment, and who pays for standby or locating.
+  - Every card repeats that it is not a locate, shows only transmission-class lines (no distribution mains, service lines, lower-voltage lines, cable or fiber), and that positions are approximate; it links Sunshine 811 (Ch. 556, F.S.) and the public PHMSA NPMS Public Viewer. No phone numbers or private contacts are requested or shown.
+  - Examples (live, Nov 24, 2026): DeSoto County center shows two FPL 230 kV overhead lines about 0.26 mi away and no pipelines; a point on a mapped Florida Gas Transmission line in central Florida (28.2159, -81.8253) shows the pipeline at about 10 ft.
+  - Each source fails on its own (lookup error text appears for just that part).
+- County pages (`county/*.html`) show the same card after the contamination card (added by `county.js`, no regeneration). Home page bid-desk list mentions it.
+- Files: `common.js` (`utilAt`, `utilHtml`), `bid.html`, `county.js`, `index.html`, `README.md`, `sitemap.xml`. `scripts/check_forms.py` still passes (all 7 forms on `mvkkzzbn`). No forms, analytics, CNAME or `leads.json` changed.
+- Still open: Formspree's free plan (50 submissions a month shared by all forms) needs a new account or login to replace or upgrade, so it was left alone. Image recompression still needs binary uploads.
+
 ## 2026-11-23
 - Bid pages: new "Contamination & cleanup sites (FDEP)" card at the point picked in the soil card (town/county center or typed job-site coordinates), queried live in the browser from Florida DEP open data (free, no key; checked Nov 23, 2026). It answers "am I drilling next to an old gas-station leak?" before you price the job:
   - Counts of open, active or on-hold FDEP cleanup sites within 500 ft, 1/4 mile and 1/2 mile, split into petroleum storage tank discharges and other cleanups (drycleaners/waste cleanup, PFAS, brownfield sites, federal facilities, Superfund), from the DEP Cleanup Sites layer behind FDEP's Contamination Locator Map (closed sites are not in it).
