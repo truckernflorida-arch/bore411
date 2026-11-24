@@ -22,11 +22,14 @@ if(ro&&!document.getElementById('geoout'))ro.closest('.card').insertAdjacentHTML
 const go=document.getElementById('geoout');
 if(go&&!document.getElementById('contout'))go.closest('.card').insertAdjacentHTML('afterend','<div class="card" style="margin-top:14px"><h3>Contamination &amp; cleanup sites (FDEP)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not an environmental site assessment.</b> Open, active or on-hold FDEP cleanup sites (leaking petroleum tanks, drycleaners, PFAS, brownfields, Superfund) within 1/2 mile of the town or county center (not a job site).</p><div id="contout" aria-live="polite"></div></div>');
 const co=document.getElementById('contout');
+if(co&&!document.getElementById('utilout'))co.closest('.card').insertAdjacentHTML('afterend','<div class="card" style="margin-top:14px"><h3>Buried &amp; overhead hazards (electric &amp; pipelines)</h3><p class="mut" style="font-size:.85rem"><b>Screening-level, not a locate.</b> Mapped high-voltage electric transmission lines and major gas, petroleum, HGL and crude pipelines within 1/2 mile of the town or county center (not a job site). Distribution and service lines are not shown. Always call Sunshine 811.</p><div id="utilout" aria-live="polite"></div></div>');
+const uo=document.getElementById('utilout');
 sp.innerHTML=C.pts.map((p,i)=>`<option value="${i}">${esc(p[0])}</option>`).join('');
 const v=x=>x==null||x===''?'—':esc(x);
 function run(){const p=C.pts[+sp.value];if(!p)return;const [lab,lat,lon]=p;
 so.innerHTML='<p class="mut">Asking USDA Soil Data Access…</p>';ko.innerHTML='<p class="mut">Asking Florida Geological Survey…</p>';
 if(go){go.innerHTML='<p class="mut">Asking Florida Geological Survey…</p>';B.geoHtml(lat,lon,lab).then(h=>{go.innerHTML=h}).catch(e=>{go.innerHTML='<p class="mut">FGS geology lookup failed ('+esc(e.message)+').</p>'})}
+if(uo){uo.innerHTML='<p class="mut">Asking HIFLD and EIA…</p>';B.utilHtml(lat,lon,lab).then(h=>{uo.innerHTML=h}).catch(e=>{uo.innerHTML='<p class="mut">Utility hazard lookup failed ('+esc(e.message)+').</p>'})}
 if(co){co.innerHTML='<p class="mut">Asking FDEP…</p>';B.contamHtml(lat,lon,lab).then(h=>{co.innerHTML=h}).catch(e=>{co.innerHTML='<p class="mut">FDEP contamination lookup failed ('+esc(e.message)+').</p>'})}
 if(ro){ro.innerHTML='<p class="mut">Asking FDOT…</p>';B.roadHtml(lat,lon,lab).then(h=>{ro.innerHTML=h}).catch(e=>{ro.innerHTML='<p class="mut">FDOT road lookup failed ('+esc(e.message)+').</p>'})}
 if(eo){eo.innerHTML='<p class="mut">Asking FEMA and USFWS…</p>';B.envHtml(lat,lon,lab).then(h=>{eo.innerHTML=h}).catch(e=>{eo.innerHTML='<p class="mut">Flood and wetlands lookup failed ('+esc(e.message)+').</p>'})}
