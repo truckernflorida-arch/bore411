@@ -48,4 +48,8 @@ B.sinkAt(lat,lon,10).then(r=>{const w=r.within;ko.innerHTML=`<div class="tbl"><t
 <tr><td>Within 1 mile</td><td><b>${w[1]}</b></td></tr><tr><td>Within 3 miles</td><td><b>${w[3]}</b></td></tr><tr><td>Within 5 miles</td><td><b>${w[5]}</b></td></tr><tr><td>Within 10 miles</td><td><b>${w[10]}</b>${r.capped?' (1,000+; list capped)':''}</td></tr>
 <tr><td>Field-verified sinkholes (10 mi)</td><td>${r.verified}</td></tr></table></div><p class="mut" style="font-size:.8rem">Source: Florida Geological Survey Subsidence Incident Reports (FDEP open data), live query ${esc(new Date().toLocaleDateString('en-US'))}${r.revised?'; newest reported event '+esc(B.fgsDate(r.revised)):''}. Most reports are not field-checked, and no reports is not a clearance.</p>`})
 .catch(e=>{ko.innerHTML='<p class="mut">Sinkhole lookup failed ('+esc(e.message)+'). See <a href="https://floridadep.gov/fgs/sinkholes" target="_blank" rel="noopener">FGS sinkholes</a>.</p>'})}
-sp.addEventListener('change',run);run()})();
+sp.addEventListener('change',run);run();
+/* Bid sources card (bids.js), inserted after the leads section. */
+(function(){const ls=document.getElementById('leads');if(!ls||document.getElementById('bidsrc'))return;const sc=document.createElement('script');sc.src='/bids.js';sc.onload=()=>{const D=window.B411BIDS;if(!D)return;const L=D.forCounty(C.k);if(!L.length)return;
+ls.insertAdjacentHTML('afterend','<section id="bidsrc"><h2>Where '+esc(C.name)+' County work gets posted</h2><p class="mut">The official bid portals for the county and its main cities. Register on them to get the agency\'s own notices. Links checked '+esc(D.checked)+'.</p><div class="grid two">'+L.map(D.card).join('')+'</div><p class="mut" style="margin-top:10px">FDOT lettings, state agencies, water districts and the other 13 counties: <a href="/bids.html#g-'+esc(C.k)+'">all bid sources</a>.</p></section>')};document.head.appendChild(sc)})();
+})();
